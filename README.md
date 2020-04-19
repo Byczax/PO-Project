@@ -14,7 +14,7 @@
 | Prowadzący:                    | mgr inż. Bogdan Gulowaty|
 </center>
 
-## Temat: Trenowanie sieci neuronowych w grze zręcznościowej
+## Temat: Symulacja interakcji pomiędzy obiektami
 
 <h4>
 Ocena:<br>
@@ -23,6 +23,8 @@ Data: <br>
 </h4>
 
 ## Założenia i opis funkcjonalny programu
+
 #### Założenia
+
 Stworzenie prostej symulacji agentowej z wykorzystaniem technik projektowania obiektowego.<br>
 Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i występujące pomiędzy nimi interakcje. Model ma być wprawiany w ruch wykorzystując generowane losowo zdarzenia, które zmuszają obiekty do rozmaitych działań.
