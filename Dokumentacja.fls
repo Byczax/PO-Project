@@ -1,0 +1,16 @@
+PWD c:\Users\Byczax\Documents\programing\PO-Project
+INPUT C:\Users\Byczax\AppData\Local\MiKTeX\2.9\miktex\data\le\pdftex\pdflatex.fmt
+INPUT c:\Users\Byczax\Documents\programing\PO-Project\Dokumentacja.tex
+OUTPUT c:\Users\Byczax\Documents\programing\PO-Project\Dokumentacja.log
+INPUT D:\Program Files (x86)\miktex\tex\latex\l3backend\l3backend-pdfmode.def
+INPUT D:\Program Files (x86)\miktex\tex\latex\l3backend\l3backend-pdfmode.def
+INPUT c:\Users\Byczax\Documents\programing\PO-Project\Dokumentacja.aux
+INPUT c:\Users\Byczax\Documents\programing\PO-Project\Dokumentacja.aux
+OUTPUT c:\Users\Byczax\Documents\programing\PO-Project\Dokumentacja.aux
+OUTPUT c:\Users\Byczax\Documents\programing\PO-Project\Dokumentacja.pdf
+INPUT C:\Users\Byczax\AppData\Local\MiKTeX\2.9\pdftex\config\pdftex.map
+INPUT c:\Users\Byczax\Documents\programing\PO-Project\Dokumentacja.aux
+INPUT D:\Program Files (x86)\miktex\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT D:\Program Files (x86)\miktex\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT D:\Program Files (x86)\miktex\fonts\type1\public\amsfonts\cm\cmr7.pfb
+INPUT D:\Program Files (x86)\miktex\fonts\type1\public\amsfonts\cm\cmr7.pfb
