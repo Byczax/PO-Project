@@ -1,17 +1,8 @@
 import java.util.Random;
-
 public class Main {
-    public static void main(String[] args) {
-        System.out.println("Hello");
-        Virus grypa = new Virus(1,1,1,2);
-        grypa.duration = 3.141528;
-        System.out.print("\n"+grypa.duration+"\n");
-        grypa.iterate();
-        System.out.println(grypa.detection+"\n");
+    public static void main(String[] args) throws Exception {
         Random rand = new Random();
-        int n = rand.nextInt(100);
-        System.out.println("\n"+n+" - Losowa liczba");
-        int populacja = 10;
+        int populacja = 10;// do 50 wtedy mieści się w konsoli
         int[][] tablica = new int [populacja][populacja];
         for (int i = 0; i < tablica.length; i++) {
             for (int j = 0; j < tablica[i].length; j++) {
@@ -20,12 +11,13 @@ public class Main {
         }
         int X = rand.nextInt(populacja-2)+1;
         int Y = rand.nextInt(populacja-2)+1;
-        System.out.println("\n"+X+" - Losowa liczba");
-        System.out.println("\n"+Y+" - Losowa liczba");
         tablica[X][Y]=1;
         int ilosc = 1;
-
+        int day = 1;
         while (ilosc<(populacja-2)*(populacja-2)) {
+            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            System.out.println("\033[37;1mDay:"+day+"\033[0m");
+            day++;
             for(int i=1;i<populacja-1;i++){
                 for(int j=1;j<populacja-1;j++){
                     if(tablica[i][j]==1){
@@ -75,14 +67,15 @@ public class Main {
                 for(int j=1;j<populacja-1;j++){
                     if(tablica[i][j]==1)
                     {
-                        System.out.print("# ");
+                        System.out.print("\033[31;1m#\033[0m ");
                     }
                     else
-                        System.out.print("O ");
+                        System.out.print("\033[32;1mO\033[0m ");
                 }
                 System.out.print("\n");
             }
-            System.out.print("\n\n\n");
+            Thread.sleep(1000);
         }
+        
     }
 }
