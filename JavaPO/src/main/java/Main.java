@@ -30,55 +30,55 @@ public class Main {
                 for(int j=1;j<community.population+1;j++){
                     if(tablica[i][j]==1){
 
-                        for(int k=1;k<=9;k+=2)
-                        if(tablica[i + k/3 -1][j + k%3 -1]==0)
-                        if (rand.nextInt(virus.infection_chance)==1) {
-                            tablica[i + k/3 -1][j + k%3 -1]=1;
-                            if(i-1!=0)
-                            {
-                                community.infected++;
+                        // for(int k=1;k<=9;k+=2)
+                        // if(tablica[i + k/3 -1][j + k%3 -1]==0)
+                        // if (rand.nextInt(virus.infection_chance)==1) {
+                        //     tablica[i + k/3 -1][j + k%3 -1]=1;
+                        //     if(i-1!=0)
+                        //     {
+                        //         community.infected++;
+                        //     }
+                        // }
+
+                            if (tablica[i-1][j]==0) {
+                                if (rand.nextInt(virus.infection_chance)==1) {
+                                    tablica[i-1][j]=1;
+                                    if(i-1!=0)
+                                    {
+                                        community.infected++;
+                                    }
+                                }
                             }
-                        }
 
-                            // if (tablica[i-1][j]==0) {
-                            //     if (rand.nextInt(virus.infection_chance)==1) {
-                            //         tablica[i-1][j]=1;
-                            //         if(i-1!=0)
-                            //         {
-                            //             community.infected++;
-                            //         }
-                            //     }
-                            // }
+                            if (tablica[i+1][j]==0) {
+                                if (rand.nextInt(virus.infection_chance)==1) {
+                                    tablica[i+1][j]=1;
+                                    if(i+1!=community.population+1)
+                                    {
+                                        community.infected++;
+                                    }
+                                    }
+                                }
 
-                            // if (tablica[i+1][j]==0) {
-                            //     if (rand.nextInt(virus.infection_chance)==1) {
-                            //         tablica[i+1][j]=1;
-                            //         if(i+1!=community.population+1)
-                            //         {
-                            //             community.infected++;
-                            //         }
-                            //         }
-                            //     }
+                            if (tablica[i][j-1]==0) {
+                                if (rand.nextInt(virus.infection_chance)==1) {
+                                    tablica[i][j-1]=1;
+                                    if(j-1!=0)
+                                    {
+                                        community.infected++;
+                                    }
+                                }
+                            }
 
-                            // if (tablica[i][j-1]==0) {
-                            //     if (rand.nextInt(virus.infection_chance)==1) {
-                            //         tablica[i][j-1]=1;
-                            //         if(j-1!=0)
-                            //         {
-                            //             community.infected++;
-                            //         }
-                            //     }
-                            // }
-
-                            // if (tablica[i][j+1]==0) {
-                            //     if (rand.nextInt(virus.infection_chance)==1) {
-                            //         tablica[i][j+1]=1;
-                            //         if(j+1!=community.population+1)
-                            //         {
-                            //             community.infected++;
-                            //         }
-                            //     }
-                            // }
+                            if (tablica[i][j+1]==0) {
+                                if (rand.nextInt(virus.infection_chance)==1) {
+                                    tablica[i][j+1]=1;
+                                    if(j+1!=community.population+1)
+                                    {
+                                        community.infected++;
+                                    }
+                                }
+                            }
                     }
                 }        
             }
