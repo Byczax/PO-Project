@@ -28,3 +28,25 @@ Data: <br>
 
 Stworzenie prostej symulacji agentowej z wykorzystaniem technik projektowania obiektowego.<br>
 Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i występujące pomiędzy nimi interakcje. Model ma być wprawiany w ruch wykorzystując generowane losowo zdarzenia, które zmuszają obiekty do rozmaitych działań.
+
+
+## Analiza czasownikowo - rzeczownikowa
+
+ Naszym zadaniem było zaprojektowanie prostej symulacji agentowej, w której badane jest zachowanie 
+ <span style="color: cyan">ludzi</span> w czasie <span style="color: orange">rozprzestrzeniania się wirusa</span>. Dla uproszczenia symulacji przyjęliśmy, że <span style="color: cyan">ludzie</span> <span style="color: orange">zamieszkują</span> jednowymiarową przestrzeń o podanej wielkości, w której może dojść do <span style="color: orange">zarażenia się wirusem</span> przez styczność <span style="color: cyan">osób</span> w sąsiedztwie.
+
+**Zachowania ludzi:**
+- <span style="color: cyan">Ludzie</span> będą mogli <span style="color: orange">zmieniać swoje położenie</span> oraz będą <span style="color: orange">dążyli do izolacji</span>, by zmniejszyć szansę na <span style="color: orange">zarażenie się wirusem</span> i <span style="color: orange">chronić</span> inne <span style="color: cyan">osoby</span> przed rozprzestrzenieniem się zarazy. 
+
+**Parametry symulacji:**
+- Zadana wielkość mapy
+- Liczba ludzi
+- Szansa na zarażenie się
+- Czas trwania pandemii (symulacja kończy się w chwili zarażenia lub wyleczenia całego społeczeństwa)
+- Wykrycie zarażenia (boolean)
+- Zachowanie dystansu przez danego człowieka
+
+
+## Diagramy
+#### Use case
+<!-- ![UseCase](https://raw.githubusercontent.com/Wint3rmute/project-oob-sem2/master/uml/Use%20case%20PPO.png) -->

@@ -1,0 +1,12 @@
+Naszym zadaniem było zaprojektowanie prostej symulacji agentowej, w której badane jest zachowanie ludzi w czasie rozprzestrzeniania się wirusa. Dla uproszczenia symulacji przyjęliśmy, że ludzie zamieszkują jednowymiarową przestrzeń o podanej wielkości, w której może dojść do zarażenia się wirusem przez styczność osób w sąsiedztwie.
+
+Zachowania ludzi:
+- Ludzie będą mogli zmieniać swoje położenie oraz będą dążyli do izolacji, by zmniejszyć szansę na zarażenie się wirusem i chronić inne osoby przed rozprzestrzenieniem się zarazy. 
+
+Parametry symulacji:
+- Zadana wielkość mapy
+- Liczba ludzi
+- Szansa na zarażenie się
+- Czas trwania pandemii (symulacja kończy się w chwili zarażenia lub wyleczenia całego społeczeństwa)
+- Wykrycie zarażenia (boolean)
+- Zachowanie dystansu przez danego człowieka
