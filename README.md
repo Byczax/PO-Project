@@ -48,9 +48,13 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 
 ## Diagramy
-#### Przypadki użyca
+#### Przypadki użycia
 ![UseCase](pictures/../Dokumentacja/pictures/usage%20diagram.png)
 
 #### Klasy
 
 ![ClassDiagram](picture/../Dokumentacja/pictures/diagram_main.png)
+
+#### Karty CRC
+
+![CRCCards](picture/../Dukumentacja/pictures/CRC.png)
