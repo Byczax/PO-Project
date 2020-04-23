@@ -30,12 +30,10 @@ public class Main {
                 for(int j=1;j<community.population+1;j++){
                     if(tablica[i][j]==1){
 
-                        // for(int k=1;k<=9;k+=2)
-                        // if(tablica[i + k/3 -1][j + k%3 -1]==0)
-                        // if (rand.nextInt(virus.infection_chance)==1) {
-                        //     tablica[i + k/3 -1][j + k%3 -1]=1;
-                        //     if(i-1!=0)
-                        //     {
+                        // for(int k=1;k<9;k+=2){
+                        //     if(tablica[i + k/3 -1][j + k%3 -1]==0 && rand.nextInt(virus.infection_chance)==1){
+                        //         tablica[i + k/3 -1][j + k%3 -1]=1;
+                        //         if(i>0 && i<community.population && j>0 && j<community.population)
                         //         community.infected++;
                         //     }
                         // }
@@ -82,18 +80,19 @@ public class Main {
                     }
                 }        
             }
-            for(int i=1;i<community.population+1;i++){
-                System.out.print("\t");
-                for(int j=1;j<community.population+1;j++){
-                    if(tablica[i][j]==1)
-                    {
-                        System.out.print("\033[31;1m#\033[0m ");
-                    }
-                    else
-                        System.out.print("\033[32;1mO\033[0m ");
-                }
-                System.out.print("\n");
-            }
+            Draw.DrawMap(community.population, tablica);
+            // for(int i=1;i<community.population+1;i++){
+            //     System.out.print("\t");
+            //     for(int j=1;j<community.population+1;j++){
+            //         if(tablica[i][j]==1)
+            //         {
+            //             System.out.print("\033[31;1m#\033[0m ");
+            //         }
+            //         else
+            //             System.out.print("\033[32;1mO\033[0m ");
+            //     }
+            //     System.out.print("\n");
+            // }
             System.out.println("Healthy: "+(community.population*community.population-community.infected)+"\t"+"Infected: "+community.infected);
             System.out.println("Press Enter To Continue To The Next Day...");
             new java.util.Scanner(System.in).nextLine();

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement />
+  <nodes>
+    <node x="0.0" y="648.0">com</node>
+    <node x="0.0" y="311.0">Human</node>
+    <node x="671.0" y="454.0">images</node>
+    <node x="261.0" y="454.0">netscape</node>
+    <node x="189.0" y="551.0">junit</node>
+    <node x="0.0" y="54.0">Draw</node>
+    <node x="165.0" y="648.0">org</node>
+    <node x="561.0" y="311.0">toolbarButtonGraphics</node>
+    <node x="330.0" y="648.0">sun</node>
+    <node x="495.0" y="648.0">jdk</node>
+    <node x="466.0" y="454.0">META-INF</node>
+    <node x="205.0" y="0.0">Virus</node>
+    <node x="0.0" y="454.0">groovyjarjarasm</node>
+    <node x="551.0" y="551.0">java</node>
+    <node x="0.0" y="551.0">groovy</node>
+    <node x="370.0" y="551.0">javax</node>
+    <node x="244.0" y="318.701171875">groovyjarjarcommonscli</node>
+    <node x="592.0" y="0.0">groovyjarjarantlr</node>
+    <node x="247.75" y="212.0">Main</node>
+    <node x="382.0" y="10.0">Community</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Main" target="Draw">
+      <point x="-60.0" y="-27.0" />
+      <point x="262.75" y="192.0" />
+      <point x="92.5" y="192.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="Main" target="Community">
+      <point x="30.0" y="-27.0" />
+      <point x="352.75" y="182.0" />
+      <point x="413.25" y="182.0" />
+      <point x="-31.25" y="71.0" />
+    </edge>
+    <edge source="groovyjarjarantlr" target="groovyjarjarantlr">
+      <point x="-77.33333333333333" y="26.0" />
+      <point x="630.6666666666666" y="72.0" />
+      <point x="572.0" y="72.0" />
+      <point x="572.0" y="43.33333333333333" />
+      <point x="-116.0" y="17.333333333333332" />
+    </edge>
+    <edge source="groovyjarjarcommonscli" target="groovyjarjarcommonscli">
+      <point x="-68.0" y="26.0" />
+      <point x="312.0" y="390.701171875" />
+      <point x="224.0" y="390.701171875" />
+      <point x="224.0" y="357.701171875" />
+      <point x="-136.0" y="13.0" />
+    </edge>
+    <edge source="Main" target="Virus">
+      <point x="0.0" y="-27.0" />
+      <point x="39.25" y="81.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="291.5" y="317.0" />
+  <SelectedNodes>
+    <node>com</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Inner Classes</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+
