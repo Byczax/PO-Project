@@ -48,5 +48,9 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 
 ## Diagramy
-#### Use case
-<!-- ![UseCase](https://raw.githubusercontent.com/Wint3rmute/project-oob-sem2/master/uml/Use%20case%20PPO.png) -->
+#### Przypadki użyca
+![UseCase](pictures/../Dokumentacja/pictures/usage%20diagram.png)
+
+#### Klasy
+
+![ClassDiagram](picture/../Dokumentacja/pictures/diagram_main.png)
