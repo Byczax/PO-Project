@@ -57,4 +57,4 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 #### Karty CRC
 
-![CRCCards](picture/../Dukumentacja/pictures/CRC.png)
+![CRCCards](pictures/../Dukumentacja/pictures/CRC.png)
