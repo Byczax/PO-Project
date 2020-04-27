@@ -53,8 +53,8 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 #### Klasy
 
-![ClassDiagram](picture/../Dokumentacja/pictures/diagram_main.png)
+![ClassDiagram](pictures/../Dokumentacja/pictures/diagram_main.png)
 
 #### Karty CRC
 
-![CRCCards](pictures/../Dukumentacja/pictures/CRC.png)
+![CRCcards](pictures/../Dokumentacja/pictures/CRC.png)
