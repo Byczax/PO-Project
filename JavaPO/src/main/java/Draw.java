@@ -7,16 +7,16 @@ public class Draw {
             return ++day;
     }
 
-    public static void DrawMap(int size, int[][] tablica,int infected)
+    public static void DrawMap(int size, Human[][] humans,int infected)
     {
         for(int i=0;i<size;i++){
             System.out.print("\t");
             for(int j=0;j<size;j++){
-                if(tablica[i][j]==0)
+                if(humans[i][j].state==HumanState.ZDROWY)
                     System.out.print("\033[32;1mO\033[0m ");
-                else if(tablica[i][j]==1)
+                else if(humans[i][j].state==HumanState.CHORY)
                     System.out.print("\033[31;1m#\033[0m ");
-                else if(tablica[i][j]==2)
+                else if(humans[i][j].state==HumanState.USUNIETY)
                     System.out.print("\033[34;1mX\033[0m ");
             }
             System.out.print("\n");

@@ -1,21 +1,30 @@
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) throws Exception {
 
         Random rand = new Random(); //create randomizer
-        Community community = new Community(0); //create community class
-        Scanner population = new Scanner(System.in); //create scaner for user input
-        System.out.println("How many people you want in simulation (<your value> ^2 [value more than 50 not fit in screen])"); //print
-        while(community.population<1)
-        {
-            community.population = population.nextInt();//get user input
-            if(community.population<1)
-            System.out.println("Wrong value, enter your value again");
-        }
+        Community community = new Community(); //create community class
+        Scanner scanner = new Scanner(System.in); //create scaner for user input
+        System.out.println("How many people do you want in a simulation (<your value> ^2 [value more than 100 not fit in screen])"); //print
+        boolean error;
+        do {
+            error = false;
+            try {
+                community.setPopulation(Integer.parseInt(scanner.nextLine()));//get user input
+            } catch (Exception e) {
+                error = true;
+                System.out.println("Wrong value, enter your value again");
+            }
+        } while (error);
 
-        int[][] tablica = new int [(community.population)][(community.population)];//create population enviroment
+        Human[][] humans = new Human[(community.getPopulation())][(community.getPopulation())];//create scanner enviroment
+//        int[][] humans = new int[(community.getPopulation())][(community.getPopulation())];//create scanner enviroment
+        for (int i = 0; i < community.getPopulation(); i++)
+            for (int j = 0; j < community.getPopulation(); j++)
+                humans[i][j]= new Human();
 
         /**
          * Create virus class and give information about:
@@ -26,39 +35,39 @@ public class Main {
          */
         Virus virus = new Virus(2, 1, 1, 1);
 
-        for (int[] ints : tablica)//clear enviroment
-            Arrays.fill(ints, 0); 
-
-        /** 
+        /**
          * Generate patient zero
-        */
-        int X = rand.nextInt(community.population);
-        int Y = rand.nextInt(community.population);
-        tablica[X][Y]=1;
+         */
+        int X = rand.nextInt(community.getPopulation());
+        int Y = rand.nextInt(community.getPopulation());
+        humans[X][Y].state = HumanState.CHORY;
 
-        community.infected = 1;//first infected
-        int day = 1;//first generation
+        community.setInfected(1);//first infected
+        int day = 0;//first generation
+        day = Draw.Day(day, community.getPopulation());
+        Draw.DrawMap(community.getPopulation(), humans, community.getInfected());
 
-        while (community.infected<(community.population)*(community.population))// 
+
+        while (community.getInfected() < (community.getPopulation()) * (community.getPopulation()))//
         {
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();//Clear console
 
             /**
              * Function Draw prints information about numer of generation
              */
-            day=Draw.Day(day, community.population);
+            day = Draw.Day(day, community.getPopulation());
 
             /**
              * Chcecking every human, spread virus
              */
-            community.infected = Virus.Infect(community.population, tablica, community.infected,virus.infection_chance);
+            community.setInfected(Virus.Infect(community.getPopulation(), humans, community.getInfected(), virus.infection_chance));
 
             /**
              * Drawing map with infected people
              */
-            Draw.DrawMap(community.population, tablica,community.infected);
+            Draw.DrawMap(community.getPopulation(), humans, community.getInfected());
         }
-        
-        population.close();
+
+        scanner.close();
     }
 }
