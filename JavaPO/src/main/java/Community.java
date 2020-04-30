@@ -1,7 +1,21 @@
 public class Community {
-    public int population;
-    public int suspective;
-    public int infected;
-    public int removed;
-    public int isolated;
+    private int population;
+    // private int suspective;
+    // private int infected;
+    // private int removed;
+    // private int isolated;
+    public Community(int population)
+    {
+        setpopulation(population);
+    }
+    
+    public void setpopulation(int population) {
+        if(population>0)
+        this.population = population;
+        //else <wyjątek>
+    }
+    public int getpopulation()
+    {
+        return population;
+    }
 }

@@ -5,10 +5,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
 
         Random rand = new Random(); //create randomizer
-        Community community = new Community(); //create community class
+        Community community = new Community(0); //create community class
         Scanner population = new Scanner(System.in); //create scaner for user input
         System.out.println("How many people you want in simulation (<your value> ^2 [value more than 50 not fit in screen])"); //print
-        community.population=0;
         while(community.population<1)
         {
             community.population = population.nextInt();//get user input
