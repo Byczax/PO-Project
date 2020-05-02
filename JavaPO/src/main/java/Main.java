@@ -67,7 +67,7 @@ public class Main {
              */
             Draw.DrawMap(community.getPopulation(), humans, community.getInfected());
         }
-
+        
         scanner.close();
     }
 }
