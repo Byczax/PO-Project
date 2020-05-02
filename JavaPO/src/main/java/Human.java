@@ -1,7 +1,9 @@
 enum HumanState {
     ZDROWY(0),
     CHORY(1),
-    USUNIETY(2);
+    CHORY_NIEWYKRYTY(2),
+    WYLECZONY(3),
+    USUNIETY(4);
 
     int state;
 
@@ -18,8 +20,16 @@ public class Human {
     public float Travel_rate;
     public HumanState state;
     public boolean hasBeenAffected;
+    public int ilnessTime;
 
     Human() {
-        state=HumanState.ZDROWY;
+        state = HumanState.ZDROWY;
     }
+
+//    public static int Zaraz(Human[][] humans, int infected, int chance) {
+//        humans[x][y].state = HumanState.CHORY;
+//        humans[x][y].hasBeenAffected = true;
+//        return infected++;
+//    }
 }
+

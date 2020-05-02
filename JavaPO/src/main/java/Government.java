@@ -1,4 +1,5 @@
-package PACKAGE_NAME;
-
 public class Government {
+    public boolean Active;
+    public int Eficiency;
+
 }
