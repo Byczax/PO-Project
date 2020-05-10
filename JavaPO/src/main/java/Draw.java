@@ -3,16 +3,17 @@ public class Draw {
 
 
     public static int Day(int day, int population) {
-        for (int i = 0; i <= (population / 2); i++)
+        for (int i = 0; i <= (population / 2); i++) {
             System.out.print("  ");
+        }
         System.out.println("\033[37;1mDay:" + day + "\033[0m");
         return ++day;
     }
 
-    public static void DrawMap(int size, Human[][] humans, int infected, int healed, int removed) {
-        for (int i = 0; i < size; i++) {
+    public static void DrawMap(Community community, Human[][] humans) {
+        for (int i = 0; i < community.getPopulation(); i++) {
             System.out.print("\t");
-            for (int j = 0; j < size; j++) {
+            for (int j = 0; j < community.getPopulation(); j++) {
                 if (humans[i][j].state == HumanState.ZDROWY)
                     System.out.print("\033[32;1mO\033[0m ");
                 else if (humans[i][j].state == HumanState.CHORY)
@@ -24,7 +25,8 @@ public class Draw {
             }
             System.out.print("\n");
         }
-        System.out.println("\033[32;1mHealthy: " + (size * size - infected) + "\033[0m\t \033[31;1mInfected: " + infected+"\t\033[0mHealed: "+healed+"\t Removed: "+removed);
+        System.out.println("\033[32;1mHealthy: " + community.getHealthy() + "\033[0m\t \033[31;1mInfected: " + community.getInfected() + "\t\033[34;1mHealed: " + community.getHealed() + "\t\033[37;1m Removed: " + community.getRemoved() + "\033[0m");
+
 //        System.out.println("\033[34;1Cured: "+);
         System.out.println("Press Enter To Continue To The Next Day...");
         new java.util.Scanner(System.in).nextLine();

@@ -7,7 +7,7 @@ public class Main {
         Random rand = new Random(); //create randomizer
         Community community = new Community(); //create community class
         Scanner scanner = new Scanner(System.in); //create scanner for user input
-        System.out.println("How many people do you want in a simulation (<your value> ^2 [value more than 100 not fit in screen])"); //print
+        System.out.println("How many people do you want in a simulation (<your value> ^2 [value more than 100 may not fit in screen])"); //print
         /**
          * Get correct value from user
          * @param SetFalse reset boolean
@@ -44,7 +44,7 @@ public class Main {
          * @param set Reproduction(unused)
          * @return created virus
          */
-        Virus virus = new Virus(2, 1, 1, 1,1);
+        Virus virus = new Virus(2, 1, 1, 1,2);
 
         /**
          * Generate patient zero
@@ -56,14 +56,14 @@ public class Main {
         int X = rand.nextInt(community.getPopulation());
         int Y = rand.nextInt(community.getPopulation());
         humans[X][Y].state = HumanState.CHORY;
-
+        community.minusHealthy();
         community.setInfected(1);//first infected
         int day = 0;//first generation
         day = Draw.Day(day, community.getPopulation());
-        Draw.DrawMap(community.getPopulation(), humans, community.getInfected(),community.getHealed(),community.getRemoved());
+        Draw.DrawMap(community, humans);
 
 
-        while (community.getInfected()!=0){ //< (community.getPopulation()) * (community.getPopulation())) {
+        while (community.getInfected()!=0){// do while virus die
             new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();//Clear console
 
             /**
@@ -77,13 +77,12 @@ public class Main {
             /**
              * Checking every human, spread virus
              */
-//            community.setInfected(Virus.Infect(community.getPopulation(), humans, community.getInfected(), virus.infection_chance));
-            community.setInfected(Virus.Infect(community.getPopulation(), humans, community.getInfected(), community.getRemoved(),community.getHealed(), virus.infection_chance, virus.range));
+            virus.infect(community, humans);
 
             /**
              * Drawing map with infected people
              */
-            Draw.DrawMap(community.getPopulation(), humans, community.getInfected(),community.getHealed(),community.getRemoved());
+            Draw.DrawMap(community, humans);
         }
 
         scanner.close();
