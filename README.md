@@ -48,8 +48,8 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 
 ## Diagramy
-#### Przypadki użycia
-![UseCase](pictures/../Dokumentacja/pictures/usage%20diagram.png)
+#### Przypadki użycia (fixed I firmly hope)
+![UseCase](pictures/../Dokumentacja/pictures/Usage.png)
 
 #### Klasy
 
@@ -59,9 +59,9 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 ![CRCcards](pictures/../Dokumentacja/pictures/CRC.PNG)
 
-#### a Sequence Diagram
+#### a Sequence Diagram (hotfix)
 
-![SequenceDiagram](pictures/../Dokumentacja/pictures/Sequence_Diagram.png)
+![SequenceDiagram](pictures/../Dokumentacja/pictures/SequenceDiagramv2.png)
 
 #### Updated Class Diagram (the 5th milestone)
 
