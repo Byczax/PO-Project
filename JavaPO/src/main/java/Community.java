@@ -1,3 +1,4 @@
+import java.util.Random;
 public class Community {
     private int population;
     private int healthy;
@@ -8,7 +9,7 @@ public class Community {
     private int isolated;
     private int duration;
     private int day;
-
+    private boolean ready;
 
     Community() {
         population = 0;
@@ -101,4 +102,35 @@ public class Community {
     public void minusHealthy() {
         healthy--;
     }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+    }
+    public void plusDay() {
+        day++;
+    }
+
+
+    public void infectset(Human[][] humans){
+        Random rand = new Random();
+        int X = rand.nextInt(population);
+        int Y = rand.nextInt(population);
+        humans[X][Y].state = HumanState.CHORY;
+        minusHealthy();
+        setInfected(1);//first infected
+        setDay(0);//first generation
+
+    }
+
+    public void setReady(boolean ready) {
+        this.ready = ready;
+    }
+    public boolean getReady() {
+        return ready;
+    }
+
 }

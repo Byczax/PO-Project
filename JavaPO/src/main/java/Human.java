@@ -15,9 +15,9 @@ enum HumanState {
 }
 
 public class Human {
-    public int Central_location;
-    public float Social_distancing;
-    public float Travel_rate;
+    private int Central_location;
+    private float Social_distancing;
+    private float Travel_rate;
     public HumanState state;
     public boolean hasBeenAffected;
     public int ilnessTime;

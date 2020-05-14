@@ -2,12 +2,12 @@
 public class Draw {
 
 
-    public static int Day(int day, int population) {
-        for (int i = 0; i <= (population / 2); i++) {
+    public static void Day(Community community) {
+        for (int i = 0; i <= (community.getPopulation() / 2); i++) {
             System.out.print("  ");
         }
-        System.out.println("\033[37;1mDay:" + day + "\033[0m");
-        return ++day;
+        System.out.println("\033[37;1mDay:" + community.getDay() + "\033[0m");
+        community.plusDay();
     }
 
     public static void DrawMap(Community community, Human[][] humans) {
@@ -15,7 +15,7 @@ public class Draw {
             System.out.print("\t");
             for (int j = 0; j < community.getPopulation(); j++) {
                 if (humans[i][j].state == HumanState.ZDROWY)
-                    System.out.print("\033[32;1mO\033[0m ");
+                    System.out.print("\033[32;1m@\033[0m ");
                 else if (humans[i][j].state == HumanState.CHORY)
                     System.out.print("\033[31;1m#\033[0m ");
                 else if (humans[i][j].state == HumanState.USUNIETY)

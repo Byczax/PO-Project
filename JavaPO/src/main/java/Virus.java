@@ -2,20 +2,44 @@ import java.util.Random;
 
 public class Virus {
 
-    private final int infection_chance;
-    private final int duration;
-    private final int detection;
-    private final int reproduction;
-    private final int range;
+    private int infection_chance;
+    private int duration;
+    private int detection;
+    private int reproduction;
+    private int range;
 
-    public Virus(int infection_chance, int duration, int detection, int reproduction, int range) {
+//    public Virus(int infection_chance, int duration, int detection, int reproduction, int range) {
+//        this.infection_chance = infection_chance;
+//        this.duration = duration;
+//        this.detection = detection;
+//        this.reproduction = reproduction;
+//        this.range = range;
+//    }
+
+
+    public int getInfection_chance() {
+        return infection_chance;
+    }
+
+    public void setInfection_chance(int infection_chance) {
         this.infection_chance = infection_chance;
-        this.duration = duration;
+    }
+
+    public void setDetection(int detection) {
         this.detection = detection;
-        this.reproduction = reproduction;
+    }
+
+    public int getDetection() {
+        return detection;
+    }
+
+    public void setRange(int range) {
         this.range = range;
     }
 
+    public int getRange() {
+        return range;
+    }
 
     public void infect(Community community, Human[][] humans) {
         Random rand = new Random();
@@ -24,8 +48,8 @@ public class Virus {
             for (int j = 0; j < community.getPopulation(); j++) {
                 humans[i][j].hasBeenAffected = false;
 
-                if (humans[i][j].ilnessTime > 0 && humans[i][j].state == HumanState.CHORY) {
-                    switch (rand.nextInt(infection_chance)) {
+                if (humans[i][j].ilnessTime >= detection && humans[i][j].state == HumanState.CHORY) {
+                    switch (rand.nextInt(infection_chance+1)) {
                         case 0:
                             humans[i][j].state = HumanState.WYLECZONY;
                             community.minusInfected();
@@ -55,7 +79,7 @@ public class Virus {
                             int y = j + l;
                             if (Math.abs(k) + Math.abs(l) <= range)
                                 if ((x + 1) > 0 && (x) < community.getPopulation() && (y + 1) > 0 && (y) < community.getPopulation())
-                                    if (humans[x][y].state == HumanState.ZDROWY && rand.nextInt(infection_chance) == 1) {
+                                    if (humans[x][y].state == HumanState.ZDROWY && (rand.nextInt(10)+1) >= infection_chance) {
                                         humans[x][y].state = HumanState.CHORY;
                                         humans[x][y].hasBeenAffected = true;
                                         community.plusInfected();

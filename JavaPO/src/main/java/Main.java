@@ -2,10 +2,22 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
 
-        Random rand = new Random(); //create randomizer
         Community community = new Community(); //create community class
+        /**
+         * Create virus class and give information about:
+         * @param set Infection chance
+         * @param set Duration(unused)
+         * @param set Detection(unused)
+         * @param set Reproduction(unused)
+         * @return created virus
+         */
+//        community.setReady(true);
+        Virus virus = new Virus();
+//        GUI gui = new GUI(community, virus);
+//        gui.setVisible(true);
+
         Scanner scanner = new Scanner(System.in); //create scanner for user input
         System.out.println("How many people do you want in a simulation (<your value> ^2 [value more than 100 may not fit in screen])"); //print
         /**
@@ -35,36 +47,24 @@ public class Main {
         for (int i = 0; i < community.getPopulation(); i++)
             for (int j = 0; j < community.getPopulation(); j++)
                 humans[i][j] = new Human();
+        virus.setRange(2);
+        virus.setInfection_chance(5);
+
 
         /**
-         * Create virus class and give information about:
-         * @param set Infection chance
-         * @param set Duration(unused)
-         * @param set Detection(unused)
-         * @param set Reproduction(unused)
-         * @return created virus
-         */
-        Virus virus = new Virus(2, 1, 1, 1,2);
-
-        /**
-         * Generate patient zero
-         * @param generate number X
-         * @param generate number Y
+         Generate patient zero
+         @param generate number X
+          * @param generate number Y
          * @param generate patinent zero
          * @return patient zero
          */
-        int X = rand.nextInt(community.getPopulation());
-        int Y = rand.nextInt(community.getPopulation());
-        humans[X][Y].state = HumanState.CHORY;
-        community.minusHealthy();
-        community.setInfected(1);//first infected
-        int day = 0;//first generation
-        day = Draw.Day(day, community.getPopulation());
+        community.infectset(humans);
+        Draw.Day(community);
         Draw.DrawMap(community, humans);
 
 
-        while (community.getInfected()!=0){// do while virus die
-            new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();//Clear console
+        while (community.getInfected() != 0) {// do while virus die
+            //new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();//Clear console
 
             /**
              * Function Draw prints information about numer of generation
@@ -72,19 +72,25 @@ public class Main {
              * @param Get population
              * @return Print enviroiment map
              */
-            day = Draw.Day(day, community.getPopulation());
+            Draw.Day(community);
 
             /**
              * Checking every human, spread virus
+             * @param get community
+             * @param get humans
+             * @return infected and healed
              */
             virus.infect(community, humans);
 
             /**
              * Drawing map with infected people
+             * @param get community
+             * @param get humans
+             * @return map
              */
             Draw.DrawMap(community, humans);
         }
 
-        scanner.close();
+        //scanner.close();
     }
 }
