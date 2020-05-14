@@ -1,30 +1,55 @@
 enum HumanState {
-    ZDROWY(0),
-    CHORY(1),
-    CHORY_NIEWYKRYTY(2),
-    WYLECZONY(3),
-    USUNIETY(4);
+    HEALTHY(0),
+    ILL(1),
+    ILL_INV(2),
+    CURED(3),
+    REMOVED(4);
 
     int state;
 
     HumanState(int state) {
         this.state = state;
     }
-
-
 }
 
 public class Human {
-    private int Central_location;
-    private float Social_distancing;
-    private float Travel_rate;
-    public HumanState state;
-    public boolean hasBeenAffected;
-    public int ilnessTime;
+    private HumanState state;
+    private boolean has_been_affected;
+    private int illness_time;
+    private int central_location;
+    private float social_distancing;
+    private float travel_rate;
 
     Human() {
-        state = HumanState.ZDROWY;
+        state = HumanState.HEALTHY;
     }
 
+    public HumanState getState() {
+        return state;
+    }
+
+    public void setState(HumanState state) {
+        this.state = state;
+    }
+
+    public int getIllnessTime() {
+        return illness_time;
+    }
+
+    public void setIllnessTime(int illness_time) {
+        this.illness_time = illness_time;
+    }
+
+    public void plusIlnessTime() {
+        illness_time++;
+    }
+
+    public boolean isHasBeenAffected() {
+        return has_been_affected;
+    }
+
+    public void setHasBeenAffected(boolean has_been_affected) {
+        this.has_been_affected = has_been_affected;
+    }
 }
 

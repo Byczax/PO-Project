@@ -14,13 +14,13 @@ public class Draw {
         for (int i = 0; i < community.getPopulation(); i++) {
             System.out.print("\t");
             for (int j = 0; j < community.getPopulation(); j++) {
-                if (humans[i][j].state == HumanState.ZDROWY)
+                if (humans[i][j].getState() == HumanState.HEALTHY)
                     System.out.print("\033[32;1m@\033[0m ");
-                else if (humans[i][j].state == HumanState.CHORY)
+                else if (humans[i][j].getState() == HumanState.ILL)
                     System.out.print("\033[31;1m#\033[0m ");
-                else if (humans[i][j].state == HumanState.USUNIETY)
+                else if (humans[i][j].getState() == HumanState.REMOVED)
                     System.out.print("\033[37;1mX\033[0m ");
-                else if (humans[i][j].state == HumanState.WYLECZONY)
+                else if (humans[i][j].getState() == HumanState.CURED)
                     System.out.print("\033[34;1mH\033[0m ");
             }
             System.out.print("\n");

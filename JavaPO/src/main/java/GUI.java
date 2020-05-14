@@ -3,8 +3,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.Guard;
-import java.util.concurrent.CountDownLatch;
 
 //enum GUIState {
 //    cos(0),
@@ -68,7 +66,7 @@ public class GUI extends JFrame {
 
         Accept.addActionListener(e -> {
             boolean error = true;
-            virus.setInfection_chance(sliderChance.getValue());
+            virus.setInfectionChance(sliderChance.getValue());
             virus.setRange(sliderRange.getValue());
             virus.setDetection(sliderDetection.getValue());
 

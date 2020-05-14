@@ -1,5 +1,5 @@
 public class Government {
-    public boolean Active;
-    public int Eficiency;
+    private boolean active;
+    private int efficiency;
 
 }

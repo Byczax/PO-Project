@@ -1,4 +1,3 @@
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -48,7 +47,7 @@ public class Main {
             for (int j = 0; j < community.getPopulation(); j++)
                 humans[i][j] = new Human();
         virus.setRange(2);
-        virus.setInfection_chance(5);
+        virus.setInfectionChance(5);
 
 
         /**

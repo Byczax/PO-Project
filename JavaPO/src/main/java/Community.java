@@ -1,4 +1,5 @@
 import java.util.Random;
+
 public class Community {
     private int population;
     private int healthy;
@@ -23,7 +24,7 @@ public class Community {
             this.isolated = 0;
             this.duration = 0;
             this.healed = 0;
-            this.healthy = population*population;
+            this.healthy = population * population;
         } else throw new Exception(); // todo lepsza nazwa exception
     }
 
@@ -46,9 +47,11 @@ public class Community {
     public void setInfected(int infected) {
         this.infected = infected;
     }
+
     public void minusInfected() {
         infected--;
     }
+
     public void plusInfected() {
         infected++;
     }
@@ -61,6 +64,7 @@ public class Community {
     public void setRemoved(int removed) {
         this.removed = removed;
     }
+
     public void plusRemoved() {
         removed++;
     }
@@ -88,6 +92,7 @@ public class Community {
     public void setHealed(int healed) {
         this.healed = healed;
     }
+
     public void plusHealed() {
         healed++;
     }
@@ -99,6 +104,7 @@ public class Community {
     public void setHealthy(int healthy) {
         this.healthy = healthy;
     }
+
     public void minusHealthy() {
         healthy--;
     }
@@ -110,16 +116,17 @@ public class Community {
     public void setDay(int day) {
         this.day = day;
     }
+
     public void plusDay() {
         day++;
     }
 
 
-    public void infectset(Human[][] humans){
+    public void infectset(Human[][] humans) {
         Random rand = new Random();
         int X = rand.nextInt(population);
         int Y = rand.nextInt(population);
-        humans[X][Y].state = HumanState.CHORY;
+        humans[X][Y].setState(HumanState.ILL);
         minusHealthy();
         setInfected(1);//first infected
         setDay(0);//first generation
@@ -129,6 +136,7 @@ public class Community {
     public void setReady(boolean ready) {
         this.ready = ready;
     }
+
     public boolean getReady() {
         return ready;
     }
