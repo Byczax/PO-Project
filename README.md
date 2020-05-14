@@ -63,7 +63,7 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 ![SequenceDiagram](pictures/../Dokumentacja/pictures/Sequence_Diagram.png)
 
-#### Updated Class Diagram
+#### Updated Class Diagram (the 5th milestone)
 
 ![ClassDiagramv2](pictures/../Dokumentacja/pictures/ClassDiagramv2.png)
 
