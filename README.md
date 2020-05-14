@@ -67,3 +67,9 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 ![ClassDiagramv2](pictures/../Dokumentacja/pictures/ClassDiagramv2.png)
 
+#### Activity Diagram
+
+![ActivityDiagram](pictures/../Dokumentacja/pictures/Activity Diagram v2.png)
+
+
+
