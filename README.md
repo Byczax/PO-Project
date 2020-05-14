@@ -55,10 +55,15 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 ![ClassDiagram](pictures/../Dokumentacja/pictures/diagram_main.png)
 
-#### Karty CRC
+#### CRC Cards
 
 ![CRCcards](pictures/../Dokumentacja/pictures/CRC.PNG)
 
 #### a Sequence Diagram
 
 ![SequenceDiagram](pictures/../Dokumentacja/pictures/Sequence_Diagram.png)
+
+### Updated Class Diagram
+
+![ClassDiagramv2](pictures/../Dokumentacja/pictures/ClassDiagramv2.png)
+
