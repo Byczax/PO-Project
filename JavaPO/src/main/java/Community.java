@@ -8,9 +8,7 @@ public class Community {
     private int removed;
     private int suspect;
     private int isolated;
-    private int duration;
-    private int day;
-    private boolean ready;
+
 
     Community() {
         population = 0;
@@ -22,7 +20,6 @@ public class Community {
             this.infected = 0;
             this.removed = 0;
             this.isolated = 0;
-            this.duration = 0;
             this.healed = 0;
             this.healthy = population * population;
         } else throw new Exception(); // todo lepsza nazwa exception
@@ -56,13 +53,8 @@ public class Community {
         infected++;
     }
 
-
     public int getRemoved() {
         return removed;
-    }
-
-    public void setRemoved(int removed) {
-        this.removed = removed;
     }
 
     public void plusRemoved() {
@@ -77,20 +69,8 @@ public class Community {
         this.isolated = isolated;
     }
 
-    public int getDuration() {
-        return duration;
-    }
-
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
-
     public int getHealed() {
         return healed;
-    }
-
-    public void setHealed(int healed) {
-        this.healed = healed;
     }
 
     public void plusHealed() {
@@ -101,24 +81,8 @@ public class Community {
         return healthy;
     }
 
-    public void setHealthy(int healthy) {
-        this.healthy = healthy;
-    }
-
     public void minusHealthy() {
         healthy--;
-    }
-
-    public int getDay() {
-        return day;
-    }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
-    public void plusDay() {
-        day++;
     }
 
 
@@ -129,16 +93,7 @@ public class Community {
         humans[X][Y].setState(HumanState.ILL);
         minusHealthy();
         setInfected(1);//first infected
-        setDay(0);//first generation
-
     }
 
-    public void setReady(boolean ready) {
-        this.ready = ready;
-    }
-
-    public boolean getReady() {
-        return ready;
-    }
 
 }

@@ -3,6 +3,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 //enum GUIState {
 //    cos(0),
@@ -73,15 +74,71 @@ public class GUI extends JFrame {
             try {
                 community.setPopulation(Integer.parseInt(PopulationValue.getText()));
             } catch (Exception f) {
-                JOptionPane.showMessageDialog(this, "Wrong population value", "Błąd", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Wrong population value",
+                        "Błąd", JOptionPane.ERROR_MESSAGE);
                 error = false;
             }
             if (error) {
-                JOptionPane.showMessageDialog(this, "Correct informations", "Confirm", JOptionPane.INFORMATION_MESSAGE);
-                community.setReady(false);
+                JOptionPane.showMessageDialog(this, "Correct informations",
+                        "Confirm", JOptionPane.INFORMATION_MESSAGE);
             }
 
         });
+    }
+
+    public static void DataFromUser(Community community, Virus virus) {
+        Scanner scanner = new Scanner(System.in); //create scanner for user input
+        System.out.println("How many people do you want in a simulation (<your value> ^2 " +
+                "[value more than 100 may not fit in screen])"); //print
+
+        boolean error;
+        do {
+            error = false;
+            try {
+                community.setPopulation(Integer.parseInt(scanner.nextLine()));//get user input
+            } catch (Exception e) {
+                error = true;
+                System.out.println("Wrong value, enter your value again");
+            }
+        } while (error);
+        System.out.println("How big range you want for virus [best value is between 1 and 3]"); //print
+        do {
+            error = false;
+            try {
+                virus.setRange(Integer.parseInt(scanner.nextLine()));//get user input
+            } catch (Exception e) {
+                error = true;
+                System.out.println("Wrong value, enter your value again");
+            }
+        } while (error);
+
+        System.out.println("give infection chance [1-100%,5-50%, 10-10%][best value is 5<x<10]"); //print
+        /**
+         * Get correct value from user
+         * @param SetFalse reset boolean
+         * @param GetValue Wait for input from user
+         * @param Check Check value is correct
+         * @retrun print "vrong value" or accept it
+         */
+        do {
+            error = false;
+            try {
+                virus.setInfectionChance(Integer.parseInt(scanner.nextLine()));//get user input
+            } catch (Exception e) {
+                error = true;
+                System.out.println("Wrong value, enter your value again");
+            }
+        } while (error);
+        System.out.println("Set detection delay [after how many days it will be detected]"); //print
+        do {
+            error = false;
+            try {
+                virus.setDetection(Integer.parseInt(scanner.nextLine()));//get user input
+            } catch (Exception e) {
+                error = true;
+                System.out.println("Wrong value, enter your value again");
+            }
+        } while (error);
     }
 
 }
