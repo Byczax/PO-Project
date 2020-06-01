@@ -16,11 +16,6 @@ public class Human {
     private HumanState state;
     private boolean hasBeenAffected;
     private int illnessTime;
-    private int centralLocation;
-    private float socialDistancing;
-    private float travelRate;
-    private int x;
-    private int y;
 
     Human() {
         state = HumanState.HEALTHY;
@@ -54,20 +49,5 @@ public class Human {
         this.hasBeenAffected = has_been_affected;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
 }
 

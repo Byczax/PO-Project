@@ -6,9 +6,6 @@ public class Community {
     private int infected;
     private int healed;
     private int removed;
-    private int suspect;
-    private int isolated;
-
 
     Community() {
         population = 0;
@@ -19,7 +16,6 @@ public class Community {
             this.population = population;
             this.infected = 0;
             this.removed = 0;
-            this.isolated = 0;
             this.healed = 0;
             this.healthy = population * population;
         } else throw new Exception(); // todo lepsza nazwa exception
@@ -27,14 +23,6 @@ public class Community {
 
     public int getPopulation() {
         return population;
-    }
-
-    public int getSuspect() {
-        return suspect;
-    }
-
-    public void setSuspect(int suspect) {
-        this.suspect = suspect;
     }
 
     public int getInfected() {
@@ -59,14 +47,6 @@ public class Community {
 
     public void plusRemoved() {
         removed++;
-    }
-
-    public int getIsolated() {
-        return isolated;
-    }
-
-    public void setIsolated(int isolated) {
-        this.isolated = isolated;
     }
 
     public int getHealed() {

@@ -5,17 +5,7 @@ public abstract class Virus {
     private int infectionChance;
     private int detection;
     private int range;
-    private int duration;
-    private int reproduction;
 
-
-//    public Virus(int infection_chance, int duration, int detection, int reproduction, int range) {
-//        this.infection_chance = infection_chance;
-//        this.duration = duration;
-//        this.detection = detection;
-//        this.reproduction = reproduction;
-//        this.range = range;
-//    }
 
     public void setInfectionChance(int infection_chance) {
         this.infectionChance = infection_chance;
@@ -95,12 +85,4 @@ public abstract class Virus {
 }
 
 class MyVirus extends Virus {
-//    void SpreadVirus(Community community, Human[][] humans) {
-//        for (int i = 0; i < community.getPopulation(); i++) {
-//            for (int j = 0; j < community.getPopulation(); j++) {
-//                humans[i][j].setState(HumanState.ILL);
-//            }
-//        }
-//    }
-
 }

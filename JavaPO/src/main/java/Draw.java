@@ -25,7 +25,7 @@ public class Draw {
             System.out.print("\n");
         }
         System.out.println("\033[32;1mHealthy: " + community.getHealthy() + "\033[0m\t \033[31;1mInfected: " + community.getInfected() + "\t\033[34;1mHealed: " + community.getHealed() + "\t\033[37;1m Removed: " + community.getRemoved() + "\033[0m");
-//        System.out.println("\033[34;1Cured: "+);
+        
         System.out.println("Press Enter To Continue To The Next Day...");
         new java.util.Scanner(System.in).nextLine();
     }
