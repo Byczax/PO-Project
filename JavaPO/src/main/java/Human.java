@@ -49,5 +49,12 @@ public class Human {
         this.hasBeenAffected = has_been_affected;
     }
 
+    public void infect() {
+        state = HumanState.ILL;
+    }
+
+    public void markAsDead() {
+        // ...
+    }
 }
 

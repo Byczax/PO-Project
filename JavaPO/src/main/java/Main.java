@@ -1,41 +1,37 @@
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main {
     private static int duration;
     private static int day = 0;
 
-    static void Infection(Community community, Human[][] humans, Virus virus) {
-        while (community.getInfected() != 0) {// do while virus die
+    private final List<Infection> infections = new ArrayList<>();
+
+    void Infection(Community community, Human[][] humans, Virus virus) {
+        while (community.getInfectedCount() != 0) {// do while virus die
             //new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();//Clear console
 
-            /**
-             * Function Draw prints information about numer of generation
-             * @param Get day
-             * @param Get population
-             * @return Print enviroiment map
-             */
-            Draw.Day(community,day);
+            // remove static classes/fields
+            Draw.Day(community, day);
             day++;
 
-            /**
-             * Checking every human, spread virus
-             * @param get community
-             * @param get humans
-             * @return infected and healed
-             */
-            virus.infect(community, humans);
+            InfectedLocations infectedLocations = virus.spread(community); // there even might be multipe viruses
+            for (Location location : infectedLocations.getLocations()) {
+                Infection infection = community.infect(location, virus); // this way we might even consider multiple Humans at location
+                infections.add(infection);
+            }
 
-            /**
-             * Drawing map with infected people
-             * @param get community
-             * @param get humans
-             * @return map
-             */
+            for (Infection infection : infections) {
+                infection.nextDay();
+                if (infection.isSevere())
+                    infection.getHuman().markAsDead();
+            }
             Draw.DrawMap(community, humans);
         }
     }
 
+    // extract
     static void GenerateHumans(Community community, Human[][] humans) {
         /**
          * Creating enviroiment
@@ -50,7 +46,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Community community = new Community(); //create community class
+        Community community = new Community(null); //create community class
         /**
          * Create virus class and give information about:
          * @param set Infection chance
@@ -60,7 +56,7 @@ public class Main {
          * @return created virus
          */
 
-        Virus virus = new MyVirus();
+        Virus virus; // ... actual vius
 
 //        ArrayList<Human> humans = new ArrayList<Human>(community.getPopulation()*community.getPopulation());
 //
@@ -68,8 +64,9 @@ public class Main {
 //        for (int i = 0; i < community.getPopulation(); i++)
 //            for (int j = 0; j < community.getPopulation(); j++)
 //                humans.add(new Human(i,j));
-        GUI.DataFromUser(community, virus);
+        GUI.DataFromUser(community, virus); // gui should be class returning actual data object
 
+        // Community/humans creation should be delegated to another class
         Human[][] humans = new Human[(community.getPopulation())][(community.getPopulation())];//create scanner environment
 
         GenerateHumans(community, humans);
@@ -90,6 +87,6 @@ public class Main {
         Draw.DrawMap(community, humans);
         day++;
 
-        Infection(community, humans, virus);
+        Infection(community, humans, concreteVirus);
     }
 }

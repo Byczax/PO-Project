@@ -1,79 +1,41 @@
-import java.util.Random;
+import java.util.Map;
 
 public class Community {
-    private int population;
-    private int healthy;
-    private int infected;
-    private int healed;
-    private int removed;
+    private final Map<Location, Human> humanByHouse;
 
-    Community() {
-        population = 0;
-    }
-
-    public void setPopulation(int population) throws Exception {
-        if (population > 0) {
-            this.population = population;
-            this.infected = 0;
-            this.removed = 0;
-            this.healed = 0;
-            this.healthy = population * population;
-        } else throw new Exception(); // todo lepsza nazwa exception
+    Community(Map<Location, Human> humanByHouse) {
+        this.humanByHouse = humanByHouse;
     }
 
     public int getPopulation() {
-        return population;
+        return humanByHouse.values().size();
     }
 
-    public int getInfected() {
+
+    Neighbors getNeighborsFor(Human human) {
+        // implement, this may be used by virus somehow
+        return Neighbors.empty();
+    }
+
+
+    public int getInfectedCount() {
+        int infected = 0;
+        for (Human human : humanByHouse.values()) {
+            if (human.getState() == HumanState.ILL)
+                infected++;
+        }
         return infected;
     }
 
-    public void setInfected(int infected) {
-        this.infected = infected;
-    }
-
-    public void minusInfected() {
-        infected--;
-    }
-
-    public void plusInfected() {
-        infected++;
-    }
-
-    public int getRemoved() {
-        return removed;
-    }
-
-    public void plusRemoved() {
-        removed++;
-    }
-
-    public int getHealed() {
-        return healed;
-    }
-
-    public void plusHealed() {
-        healed++;
-    }
-
     public int getHealthy() {
-        return healthy;
+
+        // jw
+        return 0;
     }
 
-    public void minusHealthy() {
-        healthy--;
+    public Infection infect(Location location, Virus virus) {
+        Human human = humanByHouse.get(location);
+        return new Infection(human, virus.daysToDie());
     }
-
-
-    public void infectset(Human[][] humans) {
-        Random rand = new Random();
-        int X = rand.nextInt(population);
-        int Y = rand.nextInt(population);
-        humans[X][Y].setState(HumanState.ILL);
-        minusHealthy();
-        setInfected(1);//first infected
-    }
-
 
 }
