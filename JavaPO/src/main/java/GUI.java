@@ -19,20 +19,20 @@ public class GUI extends JFrame {
     private JSlider sliderRange;
     private JSlider sliderDetection;
     private JSlider sliderChance;
-    private JLabel RangeText;
-    private JLabel DetectionText;
-    private JLabel InfectionChanceText;
-    private JButton Accept;
-    private JTextField PopulationValue;
-    private JLabel Text1;
-    private JLabel Text3;
-    private JPanel Panel;
+    private JLabel rangeText;
+    private JLabel detectionText;
+    private JLabel infectionChanceText;
+    private JButton accept;
+    private JTextField populationValue;
+    private JLabel text1;
+    private JLabel text3;
+    private JPanel panel;
     private JLabel text2;
     private String value;
 
 
     public GUI(Community community, Virus virus) {
-        add(Panel);
+        add(panel);
         setTitle("Virus simulation");
         setSize(1200, 400);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -40,39 +40,39 @@ public class GUI extends JFrame {
         sliderRange.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                RangeText.setText("Range:" + sliderRange.getValue());
+                rangeText.setText("Range:" + sliderRange.getValue());
             }
         });
 
         sliderDetection.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                DetectionText.setText("Duration: " + sliderDetection.getValue());
+                detectionText.setText("Duration: " + sliderDetection.getValue());
             }
         });
 
         sliderChance.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                InfectionChanceText.setText("Infection chance: " + ((100 - sliderChance.getValue() * 10) + 10) + "%");
+                infectionChanceText.setText("Infection chance: " + ((100 - sliderChance.getValue() * 10) + 10) + "%");
             }
         });
 
-        PopulationValue.addActionListener(new ActionListener() {
+        populationValue.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                value = PopulationValue.getText();
+                value = populationValue.getText();
             }
         });
 
-        Accept.addActionListener(e -> {
+        accept.addActionListener(e -> {
             boolean error = true;
             virus.setInfectionChance(sliderChance.getValue());
             virus.setRange(sliderRange.getValue());
             virus.setDetection(sliderDetection.getValue());
 
             try {
-                community.setPopulation(Integer.parseInt(PopulationValue.getText()));
+                community.setPopulation(Integer.parseInt(populationValue.getText()));
             } catch (Exception f) {
                 JOptionPane.showMessageDialog(this, "Wrong population value",
                         "Błąd", JOptionPane.ERROR_MESSAGE);
@@ -86,7 +86,7 @@ public class GUI extends JFrame {
         });
     }
 
-    public static void DataFromUser(Community community, Virus virus) {
+    public static void dataFromUser(Community community, Virus virus) {
         Scanner scanner = new Scanner(System.in); //create scanner for user input
         System.out.println("How many people do you want in a simulation (<your value> ^2 " +
                 "[value more than 100 may not fit in screen])"); //print

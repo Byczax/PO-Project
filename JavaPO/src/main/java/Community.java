@@ -70,7 +70,7 @@ public class Community {
         Random rand = new Random();
         int X = rand.nextInt(population);
         int Y = rand.nextInt(population);
-        humans[X][Y].setState(HumanState.ILL);
+        humans[X][Y].setState(humanState.ILL);
         minusHealthy();
         setInfected(1);//first infected
     }

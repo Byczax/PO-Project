@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="GUI">
-  <grid id="27dc6" binding="Panel" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="panel" layout-manager="GridLayoutManager" row-count="6" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="22" width="812" height="398"/>
@@ -45,7 +45,7 @@
           <value value="1"/>
         </properties>
       </component>
-      <component id="10d16" class="javax.swing.JLabel" binding="RangeText">
+      <component id="10d16" class="javax.swing.JLabel" binding="rangeText">
         <constraints>
           <grid row="0" column="1" row-span="3" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -54,7 +54,7 @@
           <verifyInputWhenFocusTarget value="true"/>
         </properties>
       </component>
-      <component id="5e4ac" class="javax.swing.JLabel" binding="DetectionText">
+      <component id="5e4ac" class="javax.swing.JLabel" binding="detectionText">
         <constraints>
           <grid row="0" column="2" row-span="3" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -62,7 +62,7 @@
           <text value="Detection: 1"/>
         </properties>
       </component>
-      <component id="8f2de" class="javax.swing.JLabel" binding="InfectionChanceText">
+      <component id="8f2de" class="javax.swing.JLabel" binding="infectionChanceText">
         <constraints>
           <grid row="0" column="3" row-span="3" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -70,7 +70,7 @@
           <text value="Infection chance: 100%"/>
         </properties>
       </component>
-      <component id="210f7" class="javax.swing.JLabel" binding="Text1">
+      <component id="210f7" class="javax.swing.JLabel" binding="text1">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="381" height="16"/>
@@ -80,7 +80,7 @@
           <text value="How many people do you want in a simulation"/>
         </properties>
       </component>
-      <component id="753cb" class="javax.swing.JLabel" binding="Text3">
+      <component id="753cb" class="javax.swing.JLabel" binding="text3">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="381" height="16"/>
@@ -91,7 +91,7 @@
           <text value="[value &amp;more than 100 may not fit in screen]"/>
         </properties>
       </component>
-      <component id="9db9f" class="javax.swing.JTextField" binding="PopulationValue">
+      <component id="9db9f" class="javax.swing.JTextField" binding="populationValue">
         <constraints>
           <grid row="3" column="0" row-span="2" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="381" height="26"/>
@@ -101,7 +101,7 @@
           <text value="10"/>
         </properties>
       </component>
-      <component id="1ffe3" class="javax.swing.JButton" binding="Accept">
+      <component id="1ffe3" class="javax.swing.JButton" binding="accept">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>

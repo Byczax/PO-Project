@@ -1,21 +1,23 @@
-import java.util.ArrayList;
-
-
+/**
+ * <h1>Virus simulation</h1>
+ * This program simulate virus generation and spread
+ * for parameters scanned from the user.
+ *
+ * @author Maciej Byczko
+ * @author Michal Maziec
+ * @version 1.5
+ * @since 18.04.2020
+ */
 public class Main {
     private static int duration;
     private static int day = 0;
 
-    static void Infection(Community community, Human[][] humans, Virus virus) {
+    static void infection(Community community, Human[][] humans, Virus virus) {
         while (community.getInfected() != 0) {// do while virus die
             //new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();//Clear console
 
-            /**
-             * Function Draw prints information about numer of generation
-             * @param Get day
-             * @param Get population
-             * @return Print enviroiment map
-             */
-            Draw.Day(community,day);
+
+            Draw.day(community, day);
             day++;
 
             /**
@@ -32,11 +34,11 @@ public class Main {
              * @param get humans
              * @return map
              */
-            Draw.DrawMap(community, humans);
+            Draw.drawMap(community, humans);
         }
     }
 
-    static void GenerateHumans(Community community, Human[][] humans) {
+    static void generateHumans(Community community, Human[][] humans) {
         /**
          * Creating enviroiment
          * @param create object
@@ -68,11 +70,11 @@ public class Main {
 //        for (int i = 0; i < community.getPopulation(); i++)
 //            for (int j = 0; j < community.getPopulation(); j++)
 //                humans.add(new Human(i,j));
-        GUI.DataFromUser(community, virus);
+        GUI.dataFromUser(community, virus);
 
         Human[][] humans = new Human[(community.getPopulation())][(community.getPopulation())];//create scanner environment
 
-        GenerateHumans(community, humans);
+        generateHumans(community, humans);
 //        for (int i = 0; i < community.getPopulation(); i++)
 //            for (int j = 0; j < community.getPopulation(); j++)
 //                humans[i][j] = new Human();
@@ -86,10 +88,10 @@ public class Main {
          * @return patient zero
          */
         community.infectset(humans);
-        Draw.Day(community,day);
-        Draw.DrawMap(community, humans);
+        Draw.day(community, day);
+        Draw.drawMap(community, humans);
         day++;
 
-        Infection(community, humans, virus);
+        infection(community, humans, virus);
     }
 }

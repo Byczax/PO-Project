@@ -1,4 +1,4 @@
-enum HumanState {
+enum humanState {
     HEALTHY(0),
     ILL(1),
     ILL_INV(2),
@@ -7,25 +7,25 @@ enum HumanState {
 
     int state;
 
-    HumanState(int state) {
+    humanState(int state) {
         this.state = state;
     }
 }
 
 public class Human {
-    private HumanState state;
+    private humanState state;
     private boolean hasBeenAffected;
     private int illnessTime;
 
     Human() {
-        state = HumanState.HEALTHY;
+        state = humanState.HEALTHY;
     }
 
-    public HumanState getState() {
+    public humanState getState() {
         return state;
     }
 
-    public void setState(HumanState state) {
+    public void setState(humanState state) {
         this.state = state;
     }
 
