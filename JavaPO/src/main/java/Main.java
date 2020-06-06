@@ -52,15 +52,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Community community = new Community(); //create community class
-        /**
-         * Create virus class and give information about:
-         * @param set Infection chance
-         * @param set Duration(unused)
-         * @param set Detection(unused)
-         * @param set Reproduction(unused)
-         * @return created virus
-         */
+        Community community = new Community(); //create community instance
 
         Virus virus = new MyVirus();
 

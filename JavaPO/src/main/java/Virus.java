@@ -25,12 +25,15 @@ public abstract class Virus {
         resetFlagsInfected(community, humans);
         healOrKillChance(community, humans);
         spreadVirus(community, humans);
+        sumUpStatsVirus(community, humans);
 
     }
 
-    /** reseting flags
+    /**
+     * reseting flags
+     *
      * @param community get community
-     * @param humans get humans
+     * @param humans    get humans
      */
     private void resetFlagsInfected(Community community, Human[][] humans) {
         for (int i = 0; i < community.getPopulation(); i++)
@@ -46,13 +49,13 @@ public abstract class Virus {
                     switch (rand.nextInt(3)) {
                         case 0:
                             humans[i][j].setState(humanState.CURED);
-                            community.minusInfected();
-                            community.plusHealed();
+//                            community.minusInfected();
+//                            community.plusHealed();
                             break;
                         case 1:
                             humans[i][j].setState(humanState.REMOVED);
-                            community.minusInfected();
-                            community.plusRemoved();
+//                            community.minusInfected();
+//                            community.plusRemoved();
                             break;
                         default:
                             break;
@@ -64,31 +67,56 @@ public abstract class Virus {
     void spreadVirus(Community community, Human[][] humans) {
         Random rand = new Random();
         for (int i = 0; i < community.getPopulation(); i++) {
-            for (int j = 0; j < community.getPopulation(); j++)
-                if (humans[i][j].getState() == humanState.ILL && !humans[i][j].isHasBeenAffected()) { //finding infected
-                    humans[i][j].setHasBeenAffected(true);
-                    humans[i][j].plusIlnessTime();
+            for (int j = 0; j < community.getPopulation(); j++) {
+                plusIllTime(community, humans, i, j);
 
 
-                    for (int k = -range; k <= range; k++)
-                        for (int l = -range; l <= range; l++) {
-                            int x = i + k;
-                            int y = j + l;
-                            if (Math.abs(k) + Math.abs(l) <= range)
-                                if ((x + 1) > 0 && (x) < community.getPopulation() && (y + 1) > 0 && (y) < community.getPopulation())
-                                    if (humans[x][y].getState() == humanState.HEALTHY && (rand.nextInt(10) + 1) >= infectionChance) {
-                                        humans[x][y].setState(humanState.ILL);
-                                        humans[x][y].setHasBeenAffected(true);
-                                        humans[x][y].setIllnessTime(0);
-                                        community.plusInfected();
-                                        community.minusHealthy();
-                                    }
+                for (int k = -range; k <= range; k++)
+                    for (int l = -range; l <= range; l++) {
+                        int x = i + k;
+                        int y = j + l;
+                        if (Math.abs(k) + Math.abs(l) <= range)
+                            if ((x + 1) > 0 && (x) < community.getPopulation() && (y + 1) > 0 && (y) < community.getPopulation())
+                                if (humans[x][y].getState() == humanState.HEALTHY && (rand.nextInt(10) + 1) >= infectionChance) {
+                                    humans[x][y].setState(humanState.ILL);
+                                    humans[x][y].setHasBeenAffected(true);
+                                    humans[x][y].setIllnessTime(0);
+//                                        community.plusInfected();
+//                                        community.minusHealthy();
+                                }
 
-                        }
-                }
+                    }
+            }
+        }
+    }
+
+    void plusIllTime(Community community, Human[][] humans, int i, int j) {
+        if (humans[i][j].getState() == humanState.ILL && !humans[i][j].isHasBeenAffected()) { //finding infected
+            humans[i][j].setHasBeenAffected(true);
+            humans[i][j].plusIlnessTime();
+        }
+    }
+
+    void sumUpStatsVirus(Community community, Human[][] humans) {
+        community.setHealthy(0);
+        community.setInfected(0);
+        community.setHealed(0);
+        community.setRemoved(0);
+        for (int i = 0; i < community.getPopulation(); i++) {
+            for (int j = 0; j < community.getPopulation(); j++) {
+                if (humans[i][j].getState() == humanState.HEALTHY)
+                    community.plusHealthy();
+                else if (humans[i][j].getState() == humanState.ILL)
+                    community.plusInfected();
+                else if (humans[i][j].getState() == humanState.CURED)
+                    community.plusHealed();
+                else if (humans[i][j].getState() == humanState.REMOVED)
+                    community.plusRemoved();
+            }
         }
     }
 }
+
 
 class MyVirus extends Virus {
 }

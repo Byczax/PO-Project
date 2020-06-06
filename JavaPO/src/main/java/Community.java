@@ -1,6 +1,9 @@
 import java.util.Random;
 
 public class Community {
+
+    private final Map<Location, Human> humanByHouse;
+
     private int population;
     private int healthy;
     private int infected;
@@ -65,6 +68,20 @@ public class Community {
         healthy--;
     }
 
+    public void setHealthy(int healthy) {
+        this.healthy = healthy;
+    }
+    public void plusHealthy() {
+        healthy++;
+    }
+
+    public void setHealed(int healed) {
+        this.healed = healed;
+    }
+
+    public void setRemoved(int removed) {
+        this.removed = removed;
+    }
 
     public void infectset(Human[][] humans) {
         Random rand = new Random();
