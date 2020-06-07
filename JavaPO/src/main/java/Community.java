@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class Community {
 
-    private final Map<Location, Human> humanByHouse;
 
     private int population;
     private int healthy;

@@ -68,8 +68,9 @@ public abstract class Virus {
         Random rand = new Random();
         for (int i = 0; i < community.getPopulation(); i++) {
             for (int j = 0; j < community.getPopulation(); j++) {
-                plusIllTime(community, humans, i, j);
-
+                if (humans[i][j].getState() == humanState.ILL && !humans[i][j].isHasBeenAffected()) { //finding infected
+                    humans[i][j].setHasBeenAffected(true);
+                    humans[i][j].plusIlnessTime();
 
                 for (int k = -range; k <= range; k++)
                     for (int l = -range; l <= range; l++) {
@@ -83,7 +84,8 @@ public abstract class Virus {
                                     humans[x][y].setIllnessTime(0);
 //                                        community.plusInfected();
 //                                        community.minusHealthy();
-                                }
+                }
+            }
 
                     }
             }
@@ -91,10 +93,7 @@ public abstract class Virus {
     }
 
     void plusIllTime(Community community, Human[][] humans, int i, int j) {
-        if (humans[i][j].getState() == humanState.ILL && !humans[i][j].isHasBeenAffected()) { //finding infected
-            humans[i][j].setHasBeenAffected(true);
-            humans[i][j].plusIlnessTime();
-        }
+        
     }
 
     void sumUpStatsVirus(Community community, Human[][] humans) {
