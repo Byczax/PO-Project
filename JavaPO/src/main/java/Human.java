@@ -10,6 +10,14 @@ enum humanState {
     humanState(int state) {
         this.state = state;
     }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setIntState(int state) {
+        this.state = state;
+    }
 }
 
 public class Human {

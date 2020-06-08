@@ -23,7 +23,7 @@ public abstract class Virus {
     public void infect(Community community, Human[][] humans) {
 
         resetFlagsInfected(community, humans);
-        healOrKillChance(community, humans);
+        healOrKillChance(community);
         spreadVirus(community, humans);
         sumUpStatsVirus(community, humans);
 
@@ -41,21 +41,21 @@ public abstract class Virus {
                 humans[i][j].setHasBeenAffected(false);
     }
 
-    private void healOrKillChance(Community community, Human[][] humans) {
+    private void healOrKillChance(Community community) {
         Random rand = new Random();
-        for (int i = 0; i < community.getPopulation(); i++)
-            for (int j = 0; j < community.getPopulation(); j++) {
-                if (humans[i][j].getIllnessTime() >= detection && humans[i][j].getState() == humanState.ILL) {
+        int population = community.getSqrtPopulation();
+        for (int i = 0; i < population; i++)
+            for (int j = 0; j < population; j++) {
+                Location location = new Location(i,j);
+
+                if (community.getHumanByHouse().get(location).getIllnessTime() >= detection &&
+                    community.getHumanByHouse().get(location).getState().getState() == humanState.ILL.state) {
                     switch (rand.nextInt(3)) {
                         case 0:
-                            humans[i][j].setState(humanState.CURED);
-//                            community.minusInfected();
-//                            community.plusHealed();
+                            community.getHumanByHouse().get(location).getState().setIntState(humanState.CURED.state);
                             break;
                         case 1:
-                            humans[i][j].setState(humanState.REMOVED);
-//                            community.minusInfected();
-//                            community.plusRemoved();
+                            community.getHumanByHouse().get(location).getState().setIntState(humanState.REMOVED.state);
                             break;
                         default:
                             break;

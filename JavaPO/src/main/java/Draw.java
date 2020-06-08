@@ -3,7 +3,7 @@ public class Draw {
 
 
     public static void day(Community community, int day) {
-        for (int i = 0; i <= (community.getPopulation() / 2); i++) {
+        for (int i = 0; i <= (community.getSqrtPopulation() / 2); i++) {
             System.out.print("  ");
         }
         System.out.println("\033[37;1mDay:" + day + "\033[0m");
@@ -17,19 +17,24 @@ public class Draw {
      * after drawing map, this function prints all stats about all humans
      *
      * @param community get community values
-     * @param humans    get humans
      */
-    public static void drawMap(Community community, Human[][] humans) {
-        for (int i = 0; i < community.getPopulation(); i++) {
+    public static void drawMap(Community community) {
+        int population = community.getSqrtPopulation();
+        int[][] map = new int[population][population];
+        for (var location:community.getHumanByHouse().keySet()) {
+
+                map[location.getX()][location.getY()] = community.getHumanByHouse().get(location).getState().getState();
+            }
+        for (int i = 0; i < population; i++) {
             System.out.print("\t");
-            for (int j = 0; j < community.getPopulation(); j++) {
-                if (humans[i][j].getState() == humanState.HEALTHY)
+            for (int j = 0; j < population; j++) {
+                if (map[i][j] == humanState.HEALTHY.state)
                     System.out.print("\033[32;1m@\033[0m ");
-                else if (humans[i][j].getState() == humanState.ILL)
+                else if (map[i][j] == humanState.ILL.state)
                     System.out.print("\033[31;1m#\033[0m ");
-                else if (humans[i][j].getState() == humanState.REMOVED)
+                else if (map[i][j] == humanState.REMOVED.state)
                     System.out.print("\033[37;1mX\033[0m ");
-                else if (humans[i][j].getState() == humanState.CURED)
+                else if (map[i][j] == humanState.CURED.state)
                     System.out.print("\033[34;1mH\033[0m ");
             }
             System.out.print("\n");

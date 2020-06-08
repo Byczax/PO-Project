@@ -1,3 +1,8 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <h1>Virus simulation</h1>
  * This program simulate virus generation and spread
@@ -9,10 +14,12 @@
  * @since 18.04.2020
  */
 public class Main {
-    private static int duration;
     private static int day = 0;
 
-    static void infection(Community community, Human[][] humans, Virus virus) {
+    private static final List<Infection> infections = new ArrayList<>();
+
+
+    static void infection(Community community, int[] myData, Virus virus) {
         while (community.getInfected() != 0) {// do while virus die
             //new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();//Clear console
 
@@ -20,41 +27,58 @@ public class Main {
             Draw.day(community, day);
             day++;
 
-            /**
+            /*
              * Checking every human, spread virus
              * @param get community
              * @param get humans
              * @return infected and healed
              */
-            virus.infect(community, humans);
+            //todo
+//            virus.infect(community, humans);
 
-            /**
+            /*
              * Drawing map with infected people
              * @param get community
              * @param get humans
              * @return map
              */
-            Draw.drawMap(community, humans);
+            Draw.drawMap(community);
         }
     }
 
-    static void generateHumans(Community community, Human[][] humans) {
-        /**
-         * Creating enviroiment
-         * @param create object
-         * @param create healty enviroment
-         * @return created enviroiment
-         */
-        for (int i = 0; i < community.getPopulation(); i++)
-            for (int j = 0; j < community.getPopulation(); j++)
-                humans[i][j] = new Human();
-    }
+//    static void generateHumans(Community community, Human[][] humans) {
+//        /*
+//         * Creating enviroiment
+//         * @param create object
+//         * @param create healty enviroment
+//         * @return created enviroiment
+//         */
+//        for (int i = 0; i < community.getPopulation(); i++)
+//            for (int j = 0; j < community.getPopulation(); j++)
+//                humans[i][j] = new Human();
+//    }
 
     public static void main(String[] args) {
 
-        Community community = new Community(); //create community instance
+        int[] myData = new int[4];
 
-        Virus virus = new MyVirus();
+//        DataFromUser.dataFromUser(myData);
+        myData[0]=20;
+        myData[1]=2;
+        myData[2]=5;
+        myData[3]=2;
+//        Community community = new Community(); //create community instance
+
+        Map<Location, Human> communityMap = new HashMap<>();
+        for (int i = 0; i < myData[dataIndex.POPULATION.index]; i++) {
+            for (int j = 0; j < myData[dataIndex.POPULATION.index]; j++) {
+                communityMap.put(new Location(i, j), new Human());
+            }
+        }
+        Community community = new Community(communityMap);
+        community.setSqrtPopulation(myData[dataIndex.POPULATION.index]);
+
+//        Virus virus = new MyVirus();
 
 //        ArrayList<Human> humans = new ArrayList<Human>(community.getPopulation()*community.getPopulation());
 //
@@ -62,28 +86,31 @@ public class Main {
 //        for (int i = 0; i < community.getPopulation(); i++)
 //            for (int j = 0; j < community.getPopulation(); j++)
 //                humans.add(new Human(i,j));
-        GUI.dataFromUser(community, virus);
+//        GUI.dataFromUser(community, virus);
 
-        Human[][] humans = new Human[(community.getPopulation())][(community.getPopulation())];//create scanner environment
+//        Human[][] humans = new Human[(community.getPopulation())][(community.getPopulation())];//create scanner environment
 
-        generateHumans(community, humans);
+//        generateHumans(community, humans);
 //        for (int i = 0; i < community.getPopulation(); i++)
 //            for (int j = 0; j < community.getPopulation(); j++)
 //                humans[i][j] = new Human();
 
 
-        /**
+        /*
          Generate patient zero
          @param generate number X
           * @param generate number Y
          * @param generate patinent zero
          * @return patient zero
          */
-        community.infectset(humans);
+        community.infectSet(community);
         Draw.day(community, day);
-        Draw.drawMap(community, humans);
+        Draw.drawMap(community);
         day++;
 
-        infection(community, humans, virus);
+//        todo zmiana human na mapę
+
+
+//        infection(community, humans, virus);
     }
 }

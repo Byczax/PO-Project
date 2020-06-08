@@ -1,31 +1,42 @@
+import java.util.Map;
 import java.util.Random;
 
 public class Community {
 
 
-    private int population;
+    private int sqrtPopulation;
     private int healthy;
     private int infected;
     private int healed;
     private int removed;
 
-    Community() {
-        population = 0;
+    private final Map<Location, Human> humanByHouse;
+    Community(Map<Location, Human> humanByHouse) {
+        this.humanByHouse = humanByHouse;
     }
-
-    public void setPopulation(int population) throws Exception {
-        if (population > 0) {
-            this.population = population;
-            this.infected = 0;
-            this.removed = 0;
-            this.healed = 0;
-            this.healthy = population * population;
-        } else throw new Exception(); // todo lepsza nazwa exception
-    }
-
     public int getPopulation() {
-        return population;
+        return humanByHouse.values().size();
     }
+
+
+
+//    Community() {
+//        population = 0;
+//    }
+
+//    public void setPopulation(int population) throws Exception {
+//        if (population > 0) {
+//            this.population = population;
+//            this.infected = 0;
+//            this.removed = 0;
+//            this.healed = 0;
+//            this.healthy = population * population;
+//        } else throw new Exception(); // todo lepsza nazwa exception
+//    }
+
+//    public int getPopulation() {
+//        return population;
+//    }
 
     public int getInfected() {
         return infected;
@@ -33,10 +44,6 @@ public class Community {
 
     public void setInfected(int infected) {
         this.infected = infected;
-    }
-
-    public void minusInfected() {
-        infected--;
     }
 
     public void plusInfected() {
@@ -63,10 +70,6 @@ public class Community {
         return healthy;
     }
 
-    public void minusHealthy() {
-        healthy--;
-    }
-
     public void setHealthy(int healthy) {
         this.healthy = healthy;
     }
@@ -82,14 +85,23 @@ public class Community {
         this.removed = removed;
     }
 
-    public void infectset(Human[][] humans) {
+    public void infectSet(Community community) {
         Random rand = new Random();
-        int X = rand.nextInt(population);
-        int Y = rand.nextInt(population);
-        humans[X][Y].setState(humanState.ILL);
-        minusHealthy();
-        setInfected(1);//first infected
+        int X = rand.nextInt(community.getSqrtPopulation());
+        int Y = rand.nextInt(community.getSqrtPopulation());
+        Location location = new Location(X,Y);
+        community.getHumanByHouse().get(location).setState(humanState.ILL);
     }
 
+    public Map<Location, Human> getHumanByHouse() {
+        return humanByHouse;
+    }
 
+    public int getSqrtPopulation() {
+        return sqrtPopulation;
+    }
+
+    public void setSqrtPopulation(int sqrtPopulation) {
+        this.sqrtPopulation = sqrtPopulation;
+    }
 }
