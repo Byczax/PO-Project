@@ -1,9 +1,10 @@
+import java.util.Objects;
+
 enum humanState {
     HEALTHY(0),
     ILL(1),
-    ILL_INV(2),
-    CURED(3),
-    REMOVED(4);
+    CURED(2),
+    REMOVED(3);
 
     int state;
 
@@ -27,6 +28,8 @@ public class Human {
 
     Human() {
         state = humanState.HEALTHY;
+        hasBeenAffected = false;
+        illnessTime = 0;
     }
 
     public humanState getState() {
@@ -57,5 +60,28 @@ public class Human {
         this.hasBeenAffected = has_been_affected;
     }
 
+    @Override
+    public String toString() {
+        return "Human{" +
+                "state=" + state +
+                ", hasBeenAffected=" + hasBeenAffected +
+                ", illnessTime=" + illnessTime +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Human human = (Human) o;
+        return hasBeenAffected == human.hasBeenAffected &&
+                illnessTime == human.illnessTime &&
+                state == human.state;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(state, hasBeenAffected, illnessTime);
+    }
 }
 
