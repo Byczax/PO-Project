@@ -10,25 +10,20 @@ import java.util.Map;
  *
  * @author Maciej Byczko
  * @author Michal Maziec
- * @version 1.5
+ * @version 2.2
  * @since 18.04.2020
  */
+
 public class Main {
     private static int day = 0;
 
     private static final List<Infection> infections = new ArrayList<>();
 
-
     static void infection(Community community, SimulationProperties myData, Virus virus) {
         while (community.getInfected() != 0) {// do while virus die
-            //new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();//Clear console
-
 
             Draw.day(community, day);
             day++;
-
-
-
 
             virus.infect(community, myData);
             Draw.drawMap(community);
@@ -36,12 +31,10 @@ public class Main {
     }
 
 
-
     public static void main(String[] args) {
 
-//        todo odkomentować wczytywanie
-//        SimulationProperties data = DataFromUser.dataFromUser();
-        SimulationProperties myData = new SimulationProperties(3,2,5,2);
+        SimulationProperties myData = DataFromUser.dataFromUser();
+//        SimulationProperties myData = new SimulationProperties(3, 2, 1, 2);
 
         Map<Location, Human> communityMap = new HashMap<>();
         for (int i = 0; i < myData.getPopulation(); i++) {
@@ -60,7 +53,6 @@ public class Main {
         day++;
 
         Virus virus = new MyVirus();
-
 
         infection(community, myData, virus);
     }

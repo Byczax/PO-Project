@@ -15,10 +15,6 @@ enum humanState {
     public int getState() {
         return state;
     }
-
-    public void setIntState(int state) {
-        this.state = state;
-    }
 }
 
 public class Human {
@@ -58,30 +54,6 @@ public class Human {
 
     public void setHasBeenAffected(boolean has_been_affected) {
         this.hasBeenAffected = has_been_affected;
-    }
-
-    @Override
-    public String toString() {
-        return "Human{" +
-                "state=" + state +
-                ", hasBeenAffected=" + hasBeenAffected +
-                ", illnessTime=" + illnessTime +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Human human = (Human) o;
-        return hasBeenAffected == human.hasBeenAffected &&
-                illnessTime == human.illnessTime &&
-                state == human.state;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(state, hasBeenAffected, illnessTime);
     }
 }
 

@@ -1,3 +1,4 @@
+import java.util.Map;
 import java.util.Random;
 
 public abstract class Virus {
@@ -14,58 +15,45 @@ public abstract class Virus {
     }
 
     private void healOrKillChance(Community community, SimulationProperties myData) {
-        int population = community.getSqrtPopulation();
-        for (int i = 0; i < population; i++) {
-            for (int j = 0; j < population; j++) {
-                Location location = new Location(i, j);
-
-                if (community.getHumanByHouse().get(location).getIllnessTime() >= myData.getDelay() &&
-                        community.getHumanByHouse().get(location).getState().getState() == humanState.ILL.state) {
-                    switch (rand.nextInt(3)) {
-                        case 0:
-                            // todo poprawne przypisanie wartości
-                            community.getHumanByHouse().get(location).getState().setIntState(humanState.CURED.state);
-                            break;
-                        case 1:
-                            // todo poprawne przypisanie wartości
-                            community.getHumanByHouse().get(location).getState().setIntState(humanState.REMOVED.state);
-                            break;
-                        default:
-                            break;
-                    }
+        for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
+            Human human = entry.getValue();
+            if (human.getIllnessTime() >= myData.getDelay() && human.getState().equals(humanState.ILL)) {
+                switch (rand.nextInt(3)) {
+                    case 0:
+                        human.setState(humanState.CURED);
+                        break;
+                    case 1:
+                        human.setState(humanState.REMOVED);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
     }
 
-    void spreadVirus(Community community, SimulationProperties myData) {
-        for (int i = 0; i < community.getSqrtPopulation(); i++) {
-            for (int j = 0; j < community.getSqrtPopulation(); j++) {
-                Location location = new Location(i, j);
-                if (community.getHumanByHouse().get(location).getState().getState() == humanState.ILL.state &&
-                        !community.getHumanByHouse().get(location).isHasBeenAffected()) { //finding infected
-                    community.getHumanByHouse().get(location).setHasBeenAffected(true);
-                    community.getHumanByHouse().get(location).plusIlnessTime();
-                    int range = myData.getRange();
-                    for (int k = -range; k <= range; k++) {
-                        for (int l = -range; l <= range; l++) {
-                            int x = i + k;
-                            int y = j + l;
-                            if (Math.abs(k) + Math.abs(l) <= range) {
-                                if ((x + 1) > 0 && (x) < community.getSqrtPopulation() && (y + 1) > 0 && (y) < community.getSqrtPopulation()) {
-                                    if (community.getHumanByHouse().get(location).getState().equals(humanState.HEALTHY)
-//                                            &&
-//                                            (rand.nextInt(10) + 1) >= myData.getInfectionChance()
-                                    ) {
+    private void spreadVirus(Community community, SimulationProperties myData) {
+        for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
+            Location location = entry.getKey();
+            Human human = entry.getValue();
+            if (human.getState().equals(humanState.ILL) && !human.isHasBeenAffected()) {
+                human.setHasBeenAffected(true);
+                human.plusIlnessTime();
 
-                                        //todo poprawne przypisanie wartości
-                                        Location location2 = new Location(x, y);
-                                        community.getHumanByHouse().get(location2).setState(humanState.ILL);
-                                        community.getHumanByHouse().get(location2).setHasBeenAffected(true);
-                                        community.getHumanByHouse().get(location2).setIllnessTime(0);
-                                    }
-                                }
-                            }
+                int range = myData.getRange();
+                for (int k = -range; k <= range; k++) {
+                    for (int l = -range; l <= range; l++) {
+                        if (Math.abs(k) + Math.abs(l) > range) continue;
+                        int x = Math.max(0, k + location.getX());
+                        int y = Math.max(0, l + location.getY());
+                        x = Math.min(community.getSqrtPopulation() - 1, x);
+                        y = Math.min(community.getSqrtPopulation() - 1, y);
+                        Location seekLocation = new Location(x, y);
+                        if (community.getHumanByHouse().get(seekLocation).getState().equals(humanState.HEALTHY) &&
+                                rand.nextInt(100) + 1 >= myData.getInfectionChance()) {
+                            community.getHumanByHouse().get(seekLocation).setState(humanState.ILL);
+                            community.getHumanByHouse().get(seekLocation).setHasBeenAffected(true);
+                            community.getHumanByHouse().get(seekLocation).setIllnessTime(0);
                         }
                     }
                 }

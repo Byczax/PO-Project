@@ -4,7 +4,7 @@ public class SimulationProperties {
     private final int range;
     private final int delay;
 
-    public SimulationProperties(int population, int infectionChance, int range, int delay) {
+    public SimulationProperties(int population, int range, int infectionChance, int delay) {
         this.population = population;
         this.infectionChance = infectionChance;
         this.range = range;

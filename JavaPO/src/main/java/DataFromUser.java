@@ -25,9 +25,9 @@ public class DataFromUser {
 
         int population = readDataFromUser("How many people do you want in a simulation (<your value> ^2 [value more than 100 may not fit in screen])");
         int range = readDataFromUser("How big range you want for virus [best value is between 1 and 3]");
-        int chance = readDataFromUser("give infection chance [1-100%,5-50%, 10-10%][best value is 5<x<10]");
+        int chance = readDataFromUser("give infection chance [100-100%,50-50%, 10-10%][best value is 50<x<100]");
         int delay = readDataFromUser("Set detection delay [after how many days it will be detected]");
-
+        range = 100 - range;
         return new SimulationProperties(population, range, chance, delay);
     }
 }

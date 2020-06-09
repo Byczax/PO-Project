@@ -3,7 +3,6 @@ import java.util.Random;
 
 public class Community {
 
-
     private int sqrtPopulation;
     private int healthy;
     private int infected;
@@ -68,21 +67,6 @@ public class Community {
         this.removed = removed;
     }
 
-
-    public void infectSet(Community community) {
-        Random rand = new Random();
-        int X = rand.nextInt(community.getSqrtPopulation());
-        int Y = rand.nextInt(community.getSqrtPopulation());
-        Location location = new Location(X, Y);
-        // todo poprawne przypisanie wartości
-        System.out.println(community.getHumanByHouse().keySet());
-        System.out.println(location);
-        var human = community.getHumanByHouse().get(location);
-        human.setState(humanState.ILL);
-        community.plusInfected();
-        community.setHealthy(community.getPopulation() - 1);
-    }
-
     public Map<Location, Human> getHumanByHouse() {
         return humanByHouse;
     }
@@ -95,34 +79,41 @@ public class Community {
         this.sqrtPopulation = sqrtPopulation;
     }
 
+    public void infectSet(Community community) {
+        Random rand = new Random();
+        int X = rand.nextInt(community.getSqrtPopulation());
+        int Y = rand.nextInt(community.getSqrtPopulation());
+        Location location = new Location(X, Y);
+        var human = community.getHumanByHouse().get(location);
+        human.setState(humanState.ILL);
+        community.plusInfected();
+        community.setHealthy(community.getPopulation() - 1);
+    }
+
     public static void sumUpStatsVirus(Community community) {
+
         community.setHealthy(0);
         community.setInfected(0);
         community.setHealed(0);
         community.setRemoved(0);
-
-        for (int i = 0; i < community.getSqrtPopulation(); i++) {
-            for (int j = 0; j < community.getSqrtPopulation(); j++) {
-                Location location = new Location(i, j);
-                if (community.getHumanByHouse().get(location).getState().getState() == humanState.HEALTHY.state)
-                    community.plusHealthy();
-                else if (community.getHumanByHouse().get(location).getState().getState() == humanState.ILL.state)
-                    community.plusInfected();
-                else if (community.getHumanByHouse().get(location).getState().getState() == humanState.CURED.state)
-                    community.plusHealed();
-                else if (community.getHumanByHouse().get(location).getState().getState() == humanState.REMOVED.state)
-                    community.plusRemoved();
+        for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
+            Human human = entry.getValue();
+            if (human.getState().equals(humanState.HEALTHY)) {
+                community.plusHealthy();
+            } else if (human.getState().equals(humanState.ILL)) {
+                community.plusInfected();
+            } else if (human.getState().equals(humanState.CURED)) {
+                community.plusHealed();
+            } else if (human.getState().equals(humanState.REMOVED)) {
+                community.plusRemoved();
             }
         }
     }
 
     public static void resetFlagsInfected(Community community) {
-        for (int i = 0; i < community.getSqrtPopulation(); i++) {
-            for (int j = 0; j < community.getSqrtPopulation(); j++) {
-                Location location = new Location(i, j);
-                var human = community.getHumanByHouse().get(location);
-                human.setHasBeenAffected(false);
-            }
+        for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
+            Human human = entry.getValue();
+            human.setHasBeenAffected(false);
         }
     }
 
