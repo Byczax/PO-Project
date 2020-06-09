@@ -1,5 +1,7 @@
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.Set;
 
 public class Community {
 
@@ -79,17 +81,29 @@ public class Community {
         this.sqrtPopulation = sqrtPopulation;
     }
 
-    public void infectSet(Community community) {
+    /**
+     * Set first infected on random place
+     *
+     * @see Random
+     */
+    public void infectSet(Set<Location> infectedLocations) {
         Random rand = new Random();
-        int X = rand.nextInt(community.getSqrtPopulation());
-        int Y = rand.nextInt(community.getSqrtPopulation());
+        int X = rand.nextInt(sqrtPopulation);
+        int Y = rand.nextInt(sqrtPopulation);
         Location location = new Location(X, Y);
-        var human = community.getHumanByHouse().get(location);
+        var human = getHumanByHouse().get(location);
         human.setState(humanState.ILL);
-        community.plusInfected();
-        community.setHealthy(community.getPopulation() - 1);
+        plusInfected();
+        setHealthy(getPopulation() - 1);
+        infectedLocations.add(location);
     }
 
+    /**
+     * Calculate statistics
+     *
+     * @param community database
+     *                  resetting all counters and count all again
+     */
     public static void sumUpStatsVirus(Community community) {
 
         community.setHealthy(0);
@@ -110,6 +124,11 @@ public class Community {
         }
     }
 
+    /**
+     * @param community database
+     *                  resets infection flags in all people
+     * @see Human
+     */
     public static void resetFlagsInfected(Community community) {
         for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
             Human human = entry.getValue();

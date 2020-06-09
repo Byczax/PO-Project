@@ -22,7 +22,6 @@ public class Draw {
         int population = community.getSqrtPopulation();
         int[][] map = new int[population][population];
         for (var location:community.getHumanByHouse().keySet()) {
-
                 map[location.getX()][location.getY()] = community.getHumanByHouse().get(location).getState().getState();
             }
         for (int i = 0; i < population; i++) {
