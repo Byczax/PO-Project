@@ -1,5 +1,3 @@
-import java.util.Objects;
-
 enum humanState {
     HEALTHY(0),
     ILL(1),
@@ -19,12 +17,10 @@ enum humanState {
 
 public class Human {
     private humanState state;
-    private boolean hasBeenAffected;
     private int illnessTime;
 
     Human() {
         state = humanState.HEALTHY;
-        hasBeenAffected = false;
         illnessTime = 0;
     }
 
@@ -48,12 +44,5 @@ public class Human {
         illnessTime++;
     }
 
-    public boolean isHasBeenAffected() {
-        return hasBeenAffected;
-    }
-
-    public void setHasBeenAffected(boolean has_been_affected) {
-        this.hasBeenAffected = has_been_affected;
-    }
 }
 

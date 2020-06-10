@@ -132,7 +132,6 @@ public class Community {
     public static void resetFlagsInfected(Community community) {
         for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
             Human human = entry.getValue();
-            human.setHasBeenAffected(false);
         }
     }
 

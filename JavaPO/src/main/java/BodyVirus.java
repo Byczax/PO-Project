@@ -39,25 +39,21 @@ public class BodyVirus implements Virus {
         for (var location : infectedLocations) {
             Human human = map.get(location);
 
-            if (!human.isHasBeenAffected()) {
-                human.setHasBeenAffected(true);
-                human.plusIlnessTime();
-                int range = myData.getRange();
-                for (int k = -range; k <= range; k++) {
-                    for (int l = -range; l <= range; l++) {
-                        if (Math.abs(k) + Math.abs(l) > range) continue;
-                        int x = Math.max(0, k + location.getX());
-                        int y = Math.max(0, l + location.getY());
-                        x = Math.min(community.getSqrtPopulation() - 1, x);
-                        y = Math.min(community.getSqrtPopulation() - 1, y);
-                        Location seekLocation = new Location(x, y);
-                        if (community.getHumanByHouse().get(seekLocation).getState().equals(humanState.HEALTHY) &&
-                                rand.nextInt(100) + 1 >= myData.getInfectionChance()) {
-                            community.getHumanByHouse().get(seekLocation).setState(humanState.ILL);
-                            community.getHumanByHouse().get(seekLocation).setHasBeenAffected(true);
-                            community.getHumanByHouse().get(seekLocation).setIllnessTime(0);
-                            tempInfectedLocations.add(seekLocation);
-                        }
+            human.plusIlnessTime();
+            int range = myData.getRange();
+            for (int k = -range; k <= range; k++) {
+                for (int l = -range; l <= range; l++) {
+                    if (Math.abs(k) + Math.abs(l) > range) continue;
+                    int x = Math.max(0, k + location.getX());
+                    int y = Math.max(0, l + location.getY());
+                    x = Math.min(community.getSqrtPopulation() - 1, x);
+                    y = Math.min(community.getSqrtPopulation() - 1, y);
+                    Location seekLocation = new Location(x, y);
+                    if (community.getHumanByHouse().get(seekLocation).getState().equals(humanState.HEALTHY) &&
+                            rand.nextInt(100) + 1 >= myData.getInfectionChance()) {
+                        community.getHumanByHouse().get(seekLocation).setState(humanState.ILL);
+                        community.getHumanByHouse().get(seekLocation).setIllnessTime(0);
+                        tempInfectedLocations.add(seekLocation);
                     }
                 }
             }
