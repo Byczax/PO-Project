@@ -1,4 +1,3 @@
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -9,14 +8,11 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class BodyVirusTest {
 
     SimulationProperties myData;
     Community community;
     Virus myVirus;
-    Set<Location> infectedLocations = new HashSet<>();
 
     @BeforeEach
     void setUp() {
@@ -28,7 +24,6 @@ class BodyVirusTest {
             }
         }
         community = new Community(communityMap);
-        infectedLocations.add(community.infectSet());
         myVirus = new BodyVirus();
     }
 
@@ -40,14 +35,9 @@ class BodyVirusTest {
 
     @Test
     void spreadVirusBodyVirus() {
-        int counter = 0;
-        myVirus.spreadVirus(community, myData, infectedLocations);
-        for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
-            Human human = entry.getValue();
-            if (human.getState() == humanState.ILL) {
-                counter++;
-            }
-        }
+        Main.infectFirstHuman(community);
+        Main.infection(community, myData, myVirus);
+        int counter = community.getInfected();
         Assertions.assertTrue(counter > 1);
     }
 }

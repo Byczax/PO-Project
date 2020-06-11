@@ -37,7 +37,7 @@ public class DataFromUser {
         int range = readDataFromUser("How big range you want for virus [best value is between 1 and 3]");
         int chance = readDataFromUser("give infection chance [100-100%,50-50%, 10-10%][best value is 50<x<100]");
         int delay = readDataFromUser("Set detection delay [after how many days it will be detected]");
-        chance = 100 - chance;
+
         return new SimulationProperties(population, range, chance, delay);
     }
 }

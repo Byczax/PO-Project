@@ -16,6 +16,24 @@ public class Main {
     private static int day = 0;
     private static final Set<Location> infectedLocations = new HashSet<>();
 
+    private static void dayZero(Community community) {
+        infectFirstHuman(community);
+
+
+        Draw.day(community, day);
+        Draw.drawMapAndStats(community);
+        day++;
+    }
+
+    private static void simulation(Community community, SimulationProperties myData, Virus virus) {
+        while (community.getInfected() != 0) {// do while virus die
+            Draw.day(community, day);
+            infection(community, myData, virus);
+            Draw.drawMapAndStats(community);
+        }
+        System.out.println("None virus left, ending simulation...");
+    }
+
     /**
      * @param community genreated community
      * @param myData    data taken from user
@@ -25,15 +43,14 @@ public class Main {
      * @see Draw here you have all drawing functions for map and stats
      */
     static void infection(Community community, SimulationProperties myData, Virus virus) {
-        while (community.getInfected() != 0) {// do while virus die
+        day++;
+        virus.infect(community, myData, infectedLocations);
+    }
 
-            Draw.day(community, day);
-            day++;
-            community = virus.infect(community, myData, infectedLocations);
-            Draw.drawMapAndStats(community);
-        }
-        System.out.println("None virus left, ending simulation...");
-
+    public static void infectFirstHuman(Community community) {
+        Location firstInfectedLocation = community.getRandomLocation();
+        infectedLocations.add(firstInfectedLocation);
+        community.setFirstInfected(firstInfectedLocation);
     }
 
 
@@ -56,14 +73,12 @@ public class Main {
         Community community = new Community(communityMap);
         community.setSqrtPopulation(myData.getPopulation());
 
-        infectedLocations.add(community.infectSet());
-
-        Draw.day(community, day);
-        Draw.drawMapAndStats(community);
-        day++;
+        dayZero(community);
 
         Virus virus = new BodyVirus();
 
-        infection(community, myData, virus);
+        simulation(community, myData, virus);
     }
+
+
 }

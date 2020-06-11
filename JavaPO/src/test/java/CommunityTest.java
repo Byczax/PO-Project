@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CommunityTest {
     Community community;
-    Set<Location> infectedLocations = new HashSet<>();
     int size = 3;
 
     @BeforeEach
@@ -30,8 +29,19 @@ class CommunityTest {
     }
 
     @Test
+    public void sumStatsTest() {
+        Community.sumUpStatsVirus(community);
+        Assertions.assertTrue(community.getHealthy() != 0);
+        assertEquals(0, community.getInfected());
+        assertEquals(0, community.getHealed());
+        assertEquals(0, community.getRemoved());
+    }
+
+    @Test
     public void setFirstInfectedTest() {
-        infectedLocations.add(community.infectSet());
+
+        Main.infectFirstHuman(community);
+
         int counter = 0;
         for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
             Human human = entry.getValue();

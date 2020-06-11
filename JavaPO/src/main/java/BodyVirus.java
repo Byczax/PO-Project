@@ -41,7 +41,8 @@ public class BodyVirus implements Virus {
             Human human = map.get(location);
             human.plusIllnessTime();
 
-            tempInfectedLocations.addAll(checkNeighbors(community, myData, location.getX(), location.getY(), tempInfectedLocations));
+            var neighbours = checkNeighbors(community, myData, location.getX(), location.getY(), tempInfectedLocations);
+            tempInfectedLocations.addAll(neighbours);
 
         }
         return tempInfectedLocations;
@@ -55,7 +56,10 @@ public class BodyVirus implements Virus {
                 if (Math.abs(k) + Math.abs(l) > range) continue;
 
                 Location seekLocation = setBorders(k, l, locationX, locationY, community.getSqrtPopulation());
-                ifInfected(community, tempInfectedLocations, myData, seekLocation);
+                if (community.getHumanByHouse().get(seekLocation).getState().equals(humanState.HEALTHY) &&
+                        rand.nextInt(100) + 1 <= myData.getInfectionChance()) {
+                    tempInfectedLocations.add(ifInfected(community, tempInfectedLocations, seekLocation));
+                }
             }
         }
         return tempInfectedLocations;
@@ -72,12 +76,11 @@ public class BodyVirus implements Virus {
     }
 
 
-    private void ifInfected(Community community, Set<Location> tempInfectedLocations, SimulationProperties myData, Location seekLocation) {
-        if (community.getHumanByHouse().get(seekLocation).getState().equals(humanState.HEALTHY) &&
-                rand.nextInt(100) + 1 >= myData.getInfectionChance()) {
-            community.getHumanByHouse().get(seekLocation).setState(humanState.ILL);
-            community.getHumanByHouse().get(seekLocation).setIllnessTime(0);
-            tempInfectedLocations.add(seekLocation);
-        }
+    private Location ifInfected(Community community, Set<Location> tempInfectedLocations, Location seekLocation) {
+
+        community.getHumanByHouse().get(seekLocation).setState(humanState.ILL);
+        community.getHumanByHouse().get(seekLocation).setIllnessTime(0);
+        tempInfectedLocations.add(seekLocation);
+        return seekLocation;
     }
 }

@@ -1,6 +1,5 @@
 import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 public class Community {
 
@@ -14,6 +13,7 @@ public class Community {
 
     Community(Map<Location, Human> humanByHouse) {
         this.humanByHouse = humanByHouse;
+        sqrtPopulation = (int) Math.sqrt(humanByHouse.values().size());
     }
 
     public int getPopulation() {
@@ -80,23 +80,6 @@ public class Community {
         this.sqrtPopulation = sqrtPopulation;
     }
 
-    /**
-     * Set first infected on random place
-     *
-     * @return infected location
-     * @see Random
-     */
-    public Location infectSet() {
-        Random rand = new Random();
-        int X = rand.nextInt(sqrtPopulation);
-        int Y = rand.nextInt(sqrtPopulation);
-        Location location = new Location(X, Y);
-        var human = getHumanByHouse().get(location);
-        human.setState(humanState.ILL);
-        plusInfected();
-        setHealthy(getPopulation() - 1);
-        return location;
-    }
 
     /**
      * Calculate statistics
@@ -121,6 +104,30 @@ public class Community {
                 community.plusRemoved();
             }
         }
+    }
+
+    /**
+     * Set first infected on random place
+     *
+     * @return infected location
+     * @see Random
+     */
+    public Location getRandomLocation() {
+        Random rand = new Random();
+        int X = rand.nextInt(sqrtPopulation);
+        int Y = rand.nextInt(sqrtPopulation);
+        //        var human = getHumanByHouse().get(location);
+//        human.setState(humanState.ILL);
+//        plusInfected();
+//        setHealthy(getPopulation() - 1);
+        return new Location(X, Y);
+    }
+
+    public void setFirstInfected(Location location) {
+        var human = getHumanByHouse().get(location);
+        human.setState(humanState.ILL);
+        plusInfected();
+        setHealthy(getPopulation() - 1);
     }
 
 //    /**
