@@ -12,16 +12,15 @@ import java.util.*;
  */
 
 public class Main {
+
     private static int day = 0;
-
-
     private static final Set<Location> infectedLocations = new HashSet<>();
 
     /**
      * @param community genreated community
-     * @param myData data taken from user
-     * @param virus chosen virus
-     * while which continues until the virus is alive
+     * @param myData    data taken from user
+     * @param virus     chosen virus
+     *                  while which continues until the virus is alive
      * @see Virus here you have infect function
      * @see Draw here you have all drawing functions for map and stats
      */
@@ -30,12 +29,19 @@ public class Main {
 
             Draw.day(community, day);
             day++;
-            virus.infect(community, myData, infectedLocations);
-            Draw.drawMap(community);
+            community = virus.infect(community, myData, infectedLocations);
+            Draw.drawMapAndStats(community);
         }
+        System.out.println("None virus left, ending simulation...");
+
     }
 
 
+    /**
+     * <h1>Main function</h1>
+     *
+     * @param args -_-
+     */
     public static void main(String[] args) {
 
         SimulationProperties myData = DataFromUser.dataFromUser();
@@ -50,10 +56,10 @@ public class Main {
         Community community = new Community(communityMap);
         community.setSqrtPopulation(myData.getPopulation());
 
-        community.infectSet(infectedLocations);
+        infectedLocations.add(community.infectSet());
 
         Draw.day(community, day);
-        Draw.drawMap(community);
+        Draw.drawMapAndStats(community);
         day++;
 
         Virus virus = new BodyVirus();

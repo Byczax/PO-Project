@@ -2,15 +2,16 @@ import java.util.*;
 
 public class BodyVirus implements Virus {
 
-    public void infect(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
+    public Community infect(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
 
-        Community.resetFlagsInfected(community);
-        healOrKillChance(community, myData, infectedLocations);
-        spreadVirus(community, myData, infectedLocations);
+//        Community.resetFlagsInfected(community);
+        infectedLocations.addAll(healOrKillChance(community, myData, infectedLocations));
+        infectedLocations.addAll(spreadVirus(community, myData, infectedLocations));
         Community.sumUpStatsVirus(community);
+        return community;
     }
 
-    public void healOrKillChance(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
+    public Set<Location> healOrKillChance(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
         var map = community.getHumanByHouse();
         Set<Location> tempInfectedLocations = new HashSet<>(infectedLocations);
         for (var location : infectedLocations) {
@@ -30,34 +31,53 @@ public class BodyVirus implements Virus {
                 }
             }
         }
-        infectedLocations.addAll(tempInfectedLocations);
+        return tempInfectedLocations;
     }
 
-    public void spreadVirus(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
+    public Set<Location> spreadVirus(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
         var map = community.getHumanByHouse();
         Set<Location> tempInfectedLocations = new HashSet<>(infectedLocations);
         for (var location : infectedLocations) {
             Human human = map.get(location);
+            human.plusIllnessTime();
 
-            human.plusIlnessTime();
-            int range = myData.getRange();
-            for (int k = -range; k <= range; k++) {
-                for (int l = -range; l <= range; l++) {
-                    if (Math.abs(k) + Math.abs(l) > range) continue;
-                    int x = Math.max(0, k + location.getX());
-                    int y = Math.max(0, l + location.getY());
-                    x = Math.min(community.getSqrtPopulation() - 1, x);
-                    y = Math.min(community.getSqrtPopulation() - 1, y);
-                    Location seekLocation = new Location(x, y);
-                    if (community.getHumanByHouse().get(seekLocation).getState().equals(humanState.HEALTHY) &&
-                            rand.nextInt(100) + 1 >= myData.getInfectionChance()) {
-                        community.getHumanByHouse().get(seekLocation).setState(humanState.ILL);
-                        community.getHumanByHouse().get(seekLocation).setIllnessTime(0);
-                        tempInfectedLocations.add(seekLocation);
-                    }
-                }
+            tempInfectedLocations.addAll(checkNeighbors(community, myData, location.getX(), location.getY(), tempInfectedLocations));
+
+        }
+        return tempInfectedLocations;
+    }
+
+    private Set<Location> checkNeighbors(Community community, SimulationProperties myData, int locationX, int locationY, Set<Location> tempInfectedLocations) {
+        int range = myData.getRange();
+
+        for (int k = -range; k <= range; k++) {
+            for (int l = -range; l <= range; l++) {
+                if (Math.abs(k) + Math.abs(l) > range) continue;
+
+                Location seekLocation = setBorders(k, l, locationX, locationY, community.getSqrtPopulation());
+                ifInfected(community, tempInfectedLocations, myData, seekLocation);
             }
         }
-        infectedLocations.addAll(tempInfectedLocations);
+        return tempInfectedLocations;
+    }
+
+    private Location setBorders(int k, int l, int lX, int lY, int sqrtPopulation) {
+        Location location;
+        int x = Math.max(0, k + lX);
+        int y = Math.max(0, l + lY);
+        x = Math.min(sqrtPopulation - 1, x);
+        y = Math.min(sqrtPopulation - 1, y);
+        location = new Location(x, y);
+        return location;
+    }
+
+
+    private void ifInfected(Community community, Set<Location> tempInfectedLocations, SimulationProperties myData, Location seekLocation) {
+        if (community.getHumanByHouse().get(seekLocation).getState().equals(humanState.HEALTHY) &&
+                rand.nextInt(100) + 1 >= myData.getInfectionChance()) {
+            community.getHumanByHouse().get(seekLocation).setState(humanState.ILL);
+            community.getHumanByHouse().get(seekLocation).setIllnessTime(0);
+            tempInfectedLocations.add(seekLocation);
+        }
     }
 }

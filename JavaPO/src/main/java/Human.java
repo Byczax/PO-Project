@@ -40,7 +40,7 @@ public class Human {
         this.illnessTime = illness_time;
     }
 
-    public void plusIlnessTime() {
+    public void plusIllnessTime() {
         illnessTime++;
     }
 

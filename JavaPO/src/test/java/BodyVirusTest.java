@@ -1,5 +1,6 @@
-import org.junit.Assert;
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -27,7 +28,7 @@ class BodyVirusTest {
             }
         }
         community = new Community(communityMap);
-        community.infectSet(infectedLocations);
+        infectedLocations.add(community.infectSet());
         myVirus = new BodyVirus();
     }
 
@@ -47,6 +48,6 @@ class BodyVirusTest {
                 counter++;
             }
         }
-        Assert.assertTrue(counter > 1);
+        Assertions.assertTrue(counter > 1);
     }
 }

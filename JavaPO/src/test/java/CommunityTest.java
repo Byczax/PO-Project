@@ -1,7 +1,7 @@
-import org.junit.Assert;
-import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
@@ -31,7 +31,7 @@ class CommunityTest {
 
     @Test
     public void setFirstInfectedTest() {
-        community.infectSet(infectedLocations);
+        infectedLocations.add(community.infectSet());
         int counter = 0;
         for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
             Human human = entry.getValue();
@@ -39,7 +39,6 @@ class CommunityTest {
                 counter++;
             }
         }
-        Assert.assertEquals(1, counter);
+        Assertions.assertEquals(1, counter);
     }
-
 }

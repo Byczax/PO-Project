@@ -2,6 +2,13 @@
 public class Draw {
 
 
+    /**
+     * <h1>Centered day value</h1>
+     * get community size and actual day to draw.
+     *
+     * @param community get community values
+     * @param day       get actual day
+     */
     public static void day(Community community, int day) {
         for (int i = 0; i <= (community.getSqrtPopulation() / 2); i++) {
             System.out.print("  ");
@@ -13,17 +20,16 @@ public class Draw {
      * <h1>Drawing function</h1>
      * This function get value from humans to draw
      * state corresponding color for every human
-     * <p>
      * after drawing map, this function prints all stats about all humans
      *
      * @param community get community values
      */
-    public static void drawMap(Community community) {
+    public static void drawMapAndStats(Community community) {
         int population = community.getSqrtPopulation();
         int[][] map = new int[population][population];
-        for (var location:community.getHumanByHouse().keySet()) {
-                map[location.getX()][location.getY()] = community.getHumanByHouse().get(location).getState().getState();
-            }
+        for (var location : community.getHumanByHouse().keySet()) {
+            map[location.getX()][location.getY()] = community.getHumanByHouse().get(location).getState().getState();
+        }
         for (int i = 0; i < population; i++) {
             System.out.print("\t");
             for (int j = 0; j < population; j++) {

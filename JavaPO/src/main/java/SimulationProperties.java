@@ -4,6 +4,14 @@ public class SimulationProperties {
     private final int range;
     private final int delay;
 
+    /**
+     * Get and set parameters from user
+     *
+     * @param population      get population
+     * @param range           get virus range
+     * @param infectionChance get virus infection chance
+     * @param delay           get discover delay
+     */
     public SimulationProperties(int population, int range, int infectionChance, int delay) {
         this.population = population;
         this.infectionChance = infectionChance;

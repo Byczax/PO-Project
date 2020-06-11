@@ -4,6 +4,13 @@ public class Location {
     private final int x;
     private final int y;
 
+    /**
+     * Get co-ordinates
+     *
+     * @param x get coordinate x
+     * @param y get coordinate y
+     *          Set co-ordinates
+     */
     public Location(int x, int y) {
         this.x = x;
         this.y = y;
