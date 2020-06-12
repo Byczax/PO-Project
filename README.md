@@ -49,7 +49,7 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 ## Diagramy
 #### The Use Case Diagram
-![UseCase](pictures/../Dokumentacja/pictures/Usage.pmg)
+![UseCase](pictures/../Dokumentacja/pictures/Usage.png)
 
 #### The Class Diagram
 
