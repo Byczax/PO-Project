@@ -2,16 +2,21 @@ import java.util.*;
 
 public class BodyVirus implements Virus {
 
-    public Community infect(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
+    public void infect(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
 
-//        Community.resetFlagsInfected(community);
-        infectedLocations.addAll(healOrKillChance(community, myData, infectedLocations));
+        infectedLocations.addAll(healedOrKilled(community, myData, infectedLocations));
         infectedLocations.addAll(spreadVirus(community, myData, infectedLocations));
         Community.sumUpStatsVirus(community);
-        return community;
     }
 
-    public Set<Location> healOrKillChance(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
+    /**
+     * if ill long enough, get a random state (ill, cured, removed) and set
+     * @param community database
+     * @param myData data from user
+     * @param infectedLocations set with infected locations
+     * @return set with removed infected
+     */
+    public Set<Location> healedOrKilled(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
         var map = community.getHumanByHouse();
         Set<Location> tempInfectedLocations = new HashSet<>(infectedLocations);
         for (var location : infectedLocations) {
@@ -34,6 +39,13 @@ public class BodyVirus implements Virus {
         return tempInfectedLocations;
     }
 
+    /**
+     * check ill human neighbours, get a infect chance, if correct, infect.
+     * @param community database
+     * @param myData data from user
+     * @param infectedLocations set with infected locations
+     * @return set with infected locations
+     */
     public Set<Location> spreadVirus(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
         var map = community.getHumanByHouse();
         Set<Location> tempInfectedLocations = new HashSet<>(infectedLocations);
@@ -48,6 +60,15 @@ public class BodyVirus implements Virus {
         return tempInfectedLocations;
     }
 
+    /**
+     * If conditions are fulfilled, add their location to infected list.
+     * @param community database
+     * @param myData user data
+     * @param locationX param X
+     * @param locationY param Y
+     * @param tempInfectedLocations set with infected locations
+     * @return infected that's fulfilled conditions
+     */
     private Set<Location> checkNeighbors(Community community, SimulationProperties myData, int locationX, int locationY, Set<Location> tempInfectedLocations) {
         int range = myData.getRange();
 
@@ -65,6 +86,14 @@ public class BodyVirus implements Virus {
         return tempInfectedLocations;
     }
 
+    /**
+     * @param k horizontal range
+     * @param l vertical range
+     * @param lX actual coordinate X
+     * @param lY actual coordinate Y
+     * @param sqrtPopulation border length
+     * @return conditioned location with restrictions
+     */
     private Location setBorders(int k, int l, int lX, int lY, int sqrtPopulation) {
         Location location;
         int x = Math.max(0, k + lX);
@@ -76,6 +105,12 @@ public class BodyVirus implements Virus {
     }
 
 
+    /**
+     * @param community database
+     * @param tempInfectedLocations set with infected locations
+     * @param seekLocation infected location
+     * @return infected location
+     */
     private Location ifInfected(Community community, Set<Location> tempInfectedLocations, Location seekLocation) {
 
         community.getHumanByHouse().get(seekLocation).setState(humanState.ILL);

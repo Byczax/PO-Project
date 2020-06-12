@@ -5,9 +5,9 @@ public interface Virus {
 
     Random rand = new Random();
 
-    Community infect(Community community, SimulationProperties myData, Set<Location> infectedLocations);
+    void infect(Community community, SimulationProperties myData, Set<Location> infectedLocations);
 
-    Set<Location> healOrKillChance(Community community, SimulationProperties myData, Set<Location> infectedLocations);
+    Set<Location> healedOrKilled(Community community, SimulationProperties myData, Set<Location> infectedLocations);
 
     Set<Location> spreadVirus(Community community, SimulationProperties myData, Set<Location> infectedLocations);
 

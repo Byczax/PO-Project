@@ -116,13 +116,13 @@ public class Community {
         Random rand = new Random();
         int X = rand.nextInt(sqrtPopulation);
         int Y = rand.nextInt(sqrtPopulation);
-        //        var human = getHumanByHouse().get(location);
-//        human.setState(humanState.ILL);
-//        plusInfected();
-//        setHealthy(getPopulation() - 1);
         return new Location(X, Y);
     }
 
+    /**
+     * setting first infected
+     * @param location generated location
+     */
     public void setFirstInfected(Location location) {
         var human = getHumanByHouse().get(location);
         human.setState(humanState.ILL);
