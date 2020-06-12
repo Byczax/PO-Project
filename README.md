@@ -48,10 +48,10 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 
 
 ## Diagramy
-#### Przypadki użycia
-![UseCase](pictures/../Dokumentacja/pictures/Usage.png)
+#### The Use Case Diagram
+![UseCase](pictures/../Dokumentacja/pictures/)
 
-#### Klasy
+#### The Class Diagram
 
 ![ClassDiagram](pictures/../Dokumentacja/pictures/Class.png)
 
@@ -60,11 +60,11 @@ Program modelujący wybrany wycinek rzeczywistości, a dokładniej obiekty i wys
 ![CRCcards](pictures/../Dokumentacja/pictures/CRC1.png)
 ![CRCcards2](pictures/../Dokumentacja/pictures/CRC2.png)
 
-#### a Sequence Diagra
+#### The Sequence Diagram
 
 ![SequenceDiagram](pictures/../Dokumentacja/pictures/Sequence.png)
 
-#### Activity Diagram
+#### The Activity Diagram
 
 ![ActivityDiagram](pictures/../Dokumentacja/pictures/Activity.png)
 
