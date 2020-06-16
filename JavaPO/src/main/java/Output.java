@@ -1,5 +1,5 @@
 
-public class Draw {
+public class Output {
 
 
     /**
@@ -9,7 +9,7 @@ public class Draw {
      * @param community get community values
      * @param day       get actual day
      */
-    public static void day(Community community, int day) {
+    public void day(Community community, int day) {
         for (int i = 0; i <= (community.getSqrtPopulation() / 2); i++) {
             System.out.print("  ");
         }
@@ -24,7 +24,7 @@ public class Draw {
      *
      * @param community get community values
      */
-    public static void drawMapAndStats(Community community) {
+    public void drawMapAndStats(Community community) {
         int population = community.getSqrtPopulation();
         int[][] map = new int[population][population];
         for (var location : community.getHumanByHouse().keySet()) {
@@ -35,7 +35,7 @@ public class Draw {
             for (int j = 0; j < population; j++) {
                 if (map[i][j] == humanState.HEALTHY.state)
                     System.out.print("\033[32;1m@\033[0m ");
-                else if (map[i][j] == humanState.ILL.state)
+                else if (map[i][j] == humanState.INFECTED.state)
                     System.out.print("\033[31;1m#\033[0m ");
                 else if (map[i][j] == humanState.REMOVED.state)
                     System.out.print("\033[37;1mX\033[0m ");
@@ -44,7 +44,8 @@ public class Draw {
             }
             System.out.print("\n");
         }
-        System.out.println("\033[32;1mHealthy: " + community.getHealthy() + "\033[0m\t \033[31;1mInfected: " + community.getInfected() + "\t\033[34;1mHealed: " + community.getHealed() + "\t\033[37;1m Removed: " + community.getRemoved() + "\033[0m");
+        CommunityStats stats = new CommunityStats(community);
+        System.out.println("\033[32;1mHealthy: " + stats.getHealthy() + "\033[0m\t \033[31;1mInfected: " + stats.getInfected() + "\t\033[34;1mHealed: " + stats.getCured() + "\t\033[37;1m Removed: " + stats.getRemoved() + "\033[0m");
 
         System.out.println("Press Enter To Continue To The Next Day...");
         new java.util.Scanner(System.in).nextLine();

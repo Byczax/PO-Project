@@ -2,11 +2,12 @@ import java.util.*;
 
 public class BodyVirus implements Virus {
 
-    public void infect(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
+    public Set<Location> infect(Community community, SimulationProperties myData, Set<Location> infectedLocations) {
 
-        infectedLocations.addAll(healedOrKilled(community, myData, infectedLocations));
-        infectedLocations.addAll(spreadVirus(community, myData, infectedLocations));
-        Community.sumUpStatsVirus(community);
+        Set<Location> tempInfectedLocations = new HashSet<>(infectedLocations);
+        tempInfectedLocations.addAll(healedOrKilled(community, myData, infectedLocations));
+        tempInfectedLocations.addAll(spreadVirus(community, myData, infectedLocations));
+        return tempInfectedLocations;
     }
 
     /**
@@ -21,7 +22,7 @@ public class BodyVirus implements Virus {
         Set<Location> tempInfectedLocations = new HashSet<>(infectedLocations);
         for (var location : infectedLocations) {
             Human human = map.get(location);
-            if (human.getIllnessTime() >= myData.getDelay() && human.getState().equals(humanState.ILL)) {
+            if (human.getIllnessTime() >= myData.getDelay() && human.getState().equals(humanState.INFECTED)) {
                 switch (rand.nextInt(3)) {
                     case 0:
                         human.setState(humanState.CURED);
@@ -113,7 +114,7 @@ public class BodyVirus implements Virus {
      */
     private Location ifInfected(Community community, Set<Location> tempInfectedLocations, Location seekLocation) {
 
-        community.getHumanByHouse().get(seekLocation).setState(humanState.ILL);
+        community.getHumanByHouse().get(seekLocation).setState(humanState.INFECTED);
         community.getHumanByHouse().get(seekLocation).setIllnessTime(0);
         tempInfectedLocations.add(seekLocation);
         return seekLocation;

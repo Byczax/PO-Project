@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CommunityTest {
     Community community;
@@ -30,11 +30,11 @@ class CommunityTest {
 
     @Test
     public void sumStatsTest() {
-        Community.sumUpStatsVirus(community);
-        Assertions.assertTrue(community.getHealthy() != 0);
-        assertEquals(0, community.getInfected());
-        assertEquals(0, community.getHealed());
-        assertEquals(0, community.getRemoved());
+        CommunityStats stats = new CommunityStats(community);
+        Assertions.assertTrue(stats.getHealthy() != 0);
+        assertEquals(0, stats.getInfected());
+        assertEquals(0, stats.getCured());
+        assertEquals(0, stats.getRemoved());
     }
 
     @Test
@@ -45,10 +45,10 @@ class CommunityTest {
         int counter = 0;
         for (Map.Entry<Location, Human> entry : community.getHumanByHouse().entrySet()) {
             Human human = entry.getValue();
-            if (human.getState() == humanState.ILL) {
+            if (human.getState() == humanState.INFECTED) {
                 counter++;
             }
         }
-        Assertions.assertEquals(1, counter);
+        assertEquals(1, counter);
     }
 }

@@ -8,7 +8,7 @@ public class DataFromUser {
      * @return value taken from the user
      * @see SimulationProperties here we have all text informations
      */
-    private static int readDataFromUser(String text) {
+    private int readDataFromUser(String text) {
         System.out.println(text);
         int x = 0;
         boolean error;
@@ -31,7 +31,7 @@ public class DataFromUser {
      *
      * @return population, range, chance, delay
      */
-    public static SimulationProperties dataFromUser() {
+    public SimulationProperties dataFromUser() {
 
         int population = readDataFromUser("How many people do you want in a simulation (<your value> ^2 [value more than 100 may not fit in screen])");
         int range = readDataFromUser("How big range you want for virus [best value is between 1 and 3]");

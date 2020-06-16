@@ -37,7 +37,8 @@ class BodyVirusTest {
     void spreadVirusBodyVirus() {
         Main.infectFirstHuman(community);
         Main.infection(community, myData, myVirus);
-        int counter = community.getInfected();
-        Assertions.assertTrue(counter > 1);
+        CommunityStats stats = new CommunityStats(community);
+        int infected = stats.getInfected();
+        Assertions.assertTrue(infected > 1);
     }
 }

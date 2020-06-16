@@ -1,6 +1,6 @@
 enum humanState {
     HEALTHY(0),
-    ILL(1),
+    INFECTED(1),
     CURED(2),
     REMOVED(3);
 
