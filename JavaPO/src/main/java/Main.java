@@ -14,12 +14,13 @@ import java.util.*;
 
 public class Main {
 
-    private static int day = 0;
+    private static int day;
     private static Set<Location> infectedLocations = new HashSet<>();
     private static final Output consoleOutput = new Output();
     private static final DataFromUser inputData = new DataFromUser();
 
     private static void dayZero(Community community) {
+        day = 0;
         infectFirstHuman(community);
         consoleOutput.day(community, day);
         consoleOutput.drawMapAndStats(community);
@@ -56,6 +57,28 @@ public class Main {
         community.setFirstInfected(firstInfectedLocation);
     }
 
+    private static void firstVirus(Community community, SimulationProperties myData) {
+        dayZero(community);
+        Virus virus = new BodyVirus();
+        simulation(community, myData, virus);
+    }
+
+    private static void secondVirus(Community community, SimulationProperties myData) {
+        dayZero(community);
+        Virus virus = new SpiritVirus();
+        simulation(community, myData, virus);
+    }
+
+    private static Map<Location, Human> generateCommunity(SimulationProperties myData) {
+        Map<Location, Human> communityMap = new HashMap<>();
+
+        for (int i = 0; i < myData.getPopulation(); i++) {
+            for (int j = 0; j < myData.getPopulation(); j++) {
+                communityMap.put(new Location(i, j), new Human());
+            }
+        }
+        return communityMap;
+    }
 
     /**
      * <h1>Main function</h1>
@@ -65,22 +88,17 @@ public class Main {
     public static void main(String[] args) {
 
         SimulationProperties myData = inputData.dataFromUser();
-//        SimulationProperties myData = new SimulationProperties(3, 2, 1, 2);
-        Map<Location, Human> communityMap = new HashMap<>();
-        for (int i = 0; i < myData.getPopulation(); i++) {
-            for (int j = 0; j < myData.getPopulation(); j++) {
-                communityMap.put(new Location(i, j), new Human());
-            }
-        }
+//        SimulationProperties myData = new SimulationProperties(3, 2, 50, 2);
 
-        Community community = new Community(communityMap);
+        Community community = new Community(generateCommunity(myData));
+        community.setSqrtPopulation(myData.getPopulation());
+        firstVirus(community, myData);
+
+        community = new Community(generateCommunity(myData));
         community.setSqrtPopulation(myData.getPopulation());
 
-        dayZero(community);
+        secondVirus(community, myData);
 
-        Virus virus = new BodyVirus();
-
-        simulation(community, myData, virus);
     }
 
 
